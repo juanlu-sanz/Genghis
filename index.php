@@ -1,4 +1,5 @@
 <?php session_start(); ?>
+<? ob_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,6 @@
     <meta name="author" content="">
     <link REL="SHORTCUT ICON" HREF="http://www.uc3m.es/favicon.ico">
     <link href="./assets/css/bootstrap.css" rel="stylesheet">
-    <script type="text/javascript" src="./assets/pret/src/prettify.js"></script>
     <style type="text/css">
     body {
         padding-top: 60px;
@@ -29,55 +29,55 @@
             <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
             <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
 
-        <script type="text/javascript">
+            <script type="text/javascript">
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-26989540-3']);
             _gaq.push(['_trackPageview']);
 
             (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
             })();
-        </script>
+            </script>
 
-    </head>
+        </head>
 
-    <body>
+        <body>
 
-        <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="">Genghis, another Khan</a>
-                    <div class="nav-collapse">
-                        <ul class="nav">
-                            <li class="active"><a href="">Home</a></li>
-                            <li><a href="#about">About</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                        </ul>
-                    </div><!--/.nav-collapse -->
+            <div class="navbar navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="">Genghis, another Khan</a>
+                        <div class="nav-collapse">
+                            <ul class="nav">
+                                <li class="active"><a href="">Home</a></li>
+                                <li><a href="#about">About</a></li>
+                                <li><a href="#contact">Contact</a></li>
+                            </ul>
+                        </div><!--/.nav-collapse -->
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <?php
-        if ($_GET['p'] != "") {
-            include($_GET['p'] . ".php");
-        } else {
-            include("home.php");
-        }
-        ?>
+            <?php
+            if ($_GET['p'] != "") {
+                include($_GET['p'] . ".php");
+            } else {
+                include("home.php");
+            }
+            ?>
 
         <!-- Le javascript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-        <script src="../assets/js/bootstrap.js"></script>
+        <script src="./assets/js/bootstrap.js"></script>
         <script>  
         $(function ()  
             { $("a[rel=tooltip]").tooltip();  
@@ -88,5 +88,48 @@
             { $("#modal").modal();  
         });  
         </script> 
+        <script>
+        $(function () {
+            $('.tabs a:last').tab('show')
+        })
+        </script>
+        <script type="text/javascript">
+        function remove_textbox() {
+            var item = document.getElementById('var_type');
+            var len = item.options.length;
+
+            var index = item.selectedIndex;
+            if (item.options[index].text == 'Person name' ) {
+                document.getElementById('min').setAttribute('type','hidden');
+                document.getElementById('max').setAttribute('type','hidden');
+            }
+            if (item.options[index].text == 'Number' ) {
+                document.getElementById('min').setAttribute('type','');
+                document.getElementById('max').setAttribute('type','');
+            }
+            
+        }
+        </script>
+        <script language="text/javascript">
+        function setOption(value) {
+            var selectElement = document.getElementById('var_type')
+            alert(value);
+            var options = selectElement.getElementsByTagName('option');
+
+            for (var i = 0, optionsLength = options.length; i < optionsLength; i++) {
+                console.log(options[i].value);
+                if (options[i].value == value) {
+                    selectElement.selectedIndex = i;
+                    return true;
+                }
+            }
+
+            return false;
+
+        }
+
+        
+        </script>
     </body>
-</html>
+    </html>
+    <? ob_flush(); ?>
