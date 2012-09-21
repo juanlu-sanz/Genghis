@@ -13,6 +13,18 @@
 		$hints = new set_of_vars();
 	}
 
+	if (isset($_SESSION['text_session'])) {
+		$exercise_text = $_SESSION['text_session'];	
+	}
+	if (isset($_SESSION['subject_session'])) {
+		$subject_text = $_SESSION['subject_session'];	
+	}
+	if (isset($_SESSION['statement_session'])) {
+		$statement_text = $_SESSION['statement_session'];	
+	}
+	if (isset($_SESSION['solution_session'])) {
+		$solution_text = $_SESSION['solution_session'];	
+	}
 
 	if ($_POST['s'] == "submit_changes" || $_POST['s'] == "submit_changes_edit" || $_POST['s'] == "submit_changes_edit_hint") {
 
@@ -47,6 +59,11 @@
 	
 	if ($_GET['del'] != "") {
 		$variables->delete_variable($_GET['del']);
+		header('Location: http://www.gast.it.uc3m.es/~jusanzm'); 
+	}
+
+	if ($_GET['del_hint'] != "") {
+		$hints->delete_variable($_GET['del_hint']);
 		header('Location: http://www.gast.it.uc3m.es/~jusanzm'); 
 	}
 
@@ -110,9 +127,16 @@
 													<?php $properties = $variables->property_dump($type_of_var);  ?>
 													<td>
 
-														<?php echo "<select class=\"span2\" name=\"var_type\" id=\"var_type\" onChange=\"remove_textbox()\" onselect=\"setOption('".$properties[0]."')\">" ; ?>
-															<option value="Number">Number</option>
-															<option value="Person name">Person name</option>
+														<select class="span2" name="var_type" id="var_type" onChange='remove_textbox()'>
+															<?php 
+															foreach (array('Number', 'Person name') as $key => $value) {
+																if ($value == $properties[0]) {
+																	echo "<option value=\"".$value."\" selected=\"selected\">".$value."</option>";
+																} else {
+																	echo "<option value=\"".$value."\">".$value."</option>";
+																}
+															}
+															?>
 														</select>
 														
 														<input type="text" class="input-small" value=<?php echo "\"".$properties[1]."\""; ?> name="min" id="min">
@@ -148,7 +172,7 @@
 								<option>Number</option>
 								<option>Person name</option>
 							</select>
-							<input type="text" class="input-small" placeholder="Variable name" name="var_name" id="var_name">
+							<input type="text" class="input-small" placeholder='Variable name' name="var_name" id="var_name">
 							<input type="text" class="input-small" placeholder="Minimum" name="min" id="min">
 							<input type="text" class="input-small" placeholder="Maximum" name="max" id="max">
 							<button type="submit" name="s" value="submit_changes" class="btn btn-success"><i class="icon-plus-sign icon-white"></i></button>
@@ -158,6 +182,11 @@
 
 					<!--  %%%%% Creation and management of the exercise text %%%%%  -->
 					<div class="well">
+
+						
+
+
+						
 						<form class="" action="?p=home" method="post">
 							<h4>Title</h4>
 							<textarea class="span6" name="subj_text" id="subj_text" rows="1"><?php
@@ -269,7 +298,9 @@
 
 					<div id="myTabContent" class="tab-content">
 						<div style="margin-left:-30px;" class="tab-pane active" id="preview">
-							<iframe class="span5" src="http://163.117.141.254:8000/exercises/aa.html" height="800"></iframe>
+							<iframe class="span5" src="http://163.117.141.253:8000/exercises/aa.html" height="700" frameborder="0" ></iframe>
+
+							
 						</div>
 						<div class="tab-pane fade" id="code">
 							<textarea class="span5" rows="30"><?php process_and_parse(); ?></textarea>

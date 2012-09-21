@@ -56,9 +56,9 @@
                         <a class="brand" href="">Genghis, another Khan</a>
                         <div class="nav-collapse">
                             <ul class="nav">
-                                <li class="active"><a href="">Home</a></li>
-                                <li><a href="#about">About</a></li>
-                                <li><a href="#contact">Contact</a></li>
+                                <li class="active"><a href="?p=fib">Fill in the Blank</a></li>
+                                <li><a href="?p=mc">Multiple Choice</a></li>
+                                <li><a href="?p=tf">True/False</a></li>
                             </ul>
                         </div><!--/.nav-collapse -->
                     </div>
@@ -112,7 +112,7 @@
         </script>
         <script language="text/javascript">
         function setOption(value) {
-            var selectElement = document.getElementById('var_type')
+            var selectElement = document.getElementById('var_type');
             alert(value);
             var options = selectElement.getElementsByTagName('option');
 
@@ -130,6 +130,7 @@
 
         
         </script>
+
     </body>
     </html>
     <? ob_flush(); ?>
