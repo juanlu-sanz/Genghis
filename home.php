@@ -13,6 +13,11 @@
 		$hints = new set_of_vars();
 	}
 
+	if ($_POST['delete_all'] == "1") {
+		$variables = new set_of_vars();
+		$hints = new set_of_vars();
+	}
+
 	if (isset($_SESSION['text_session'])) {
 		$exercise_text = $_SESSION['text_session'];	
 	}
@@ -24,6 +29,9 @@
 	}
 	if (isset($_SESSION['solution_session'])) {
 		$solution_text = $_SESSION['solution_session'];	
+	}
+	if (isset($_SESSION['solution_error_session'])) {
+		$solution_error_text = $_SESSION['solution_error_session'];	
 	}
 
 	if ($_POST['s'] == "submit_changes" || $_POST['s'] == "submit_changes_edit" || $_POST['s'] == "submit_changes_edit_hint") {
@@ -56,6 +64,9 @@
 	if (isset($_POST['sol_text'])) {
 		$solution_text = $_POST['sol_text'];
 	}
+	if (isset($_POST['sol_error_text'])) {
+		$solution_error_text = $_POST['sol_error_text'];
+	}
 	
 	if ($_GET['del'] != "") {
 		$variables->delete_variable($_GET['del']);
@@ -74,6 +85,7 @@
 	$_SESSION['statement_session'] = $statement_text;
 	$_SESSION['subject_session'] = $subject_text;
 	$_SESSION['solution_session'] = $solution_text;
+	$_SESSION['solution_error_session'] = $solution_error_text;
 	?> 
 	<!-- Example row of columns -->
 	<div class="row">
@@ -207,11 +219,14 @@
 							}
 							?></textarea>
 							<h4>Solution</h4>
-							<textarea class="span6" name="sol_text" id="sol_text" rows="1"><?php
-							if (isset($solution_text)) {
-								echo $solution_text;
-							}
-							?></textarea>
+							<div class="row" style="padding-left: 30px">
+								<textarea class="span5" name="sol_text" id="sol_text" rows="2"><?php
+								if (isset($solution_text)) {
+									echo $solution_text;
+								}
+								?></textarea>
+								<input type="text" class="input-small span1" placeholder="Error" <?php if ($solution_error_text != ""){ echo "value=\"".$solution_error_text."\""; } ?> name="sol_error_text" id="sol_error_text">
+							</div>
 							<h3>Hints</h3>
 							<div class="well">
 								<h4>Current Hints</h4>
@@ -306,7 +321,22 @@
 							<textarea class="span5" rows="30"><?php process_and_parse(); ?></textarea>
 						</div>
 					</div>
+					<br/>
+					<div class="row-fluid">
+						<form action="download.php" class="form-inline span1" style="width:80px;">
+							<button class="btn btn-success"><i class="icon-arrow-down icon-white"></i> Save</button>
+						</form>
+						<form class="form-inline" action="?p=home" method="post" accept-charset="utf-8"> 
+							<input type="hidden" name="subj_text" id="subj_text" value="">
+							<input type="hidden" name="stat_text" id="stat_text" value="">
+							<input type="hidden" name="exer_text" id="exer_text" value="">
+							<input type="hidden" name="sol_text" id="sol_text" value="">
+							<input type="hidden" name="sol_error_text" id="sol_error_text" value="">
+							<input type="hidden" name="delete_all" id="delete_all" value="1">
+							<button class="btn btn-info"><i class="icon-plus-sign icon-white"></i> New</button>
+						</form>
 
+					</div>
 				</div>
 
 			</div>
