@@ -201,13 +201,13 @@
 						
 						<form class="" action="?p=home" method="post">
 							<h4>Title</h4>
-							<textarea class="span6" name="subj_text" id="subj_text" rows="1"><?php
+							<textarea class="span6 active_textbox" name="subj_text" id="subj_text" rows="1"><?php
 							if (isset($subject_text)) {
 								echo $subject_text;
 							}
 							?></textarea>
 							<h4>Statement</h4>
-							<textarea class="span6" name="stat_text" id="stat_text" rows="5"><?php
+							<textarea class="span6 active_textbox" name="stat_text" id="stat_text" rows="5"><?php
 							if (isset($statement_text)) {
 								echo $statement_text;
 							}
