@@ -3,7 +3,7 @@
 	<?php
 	include("variable_Modal.php");
 	include("parser.php");
-	include("variable_handling.php");
+	/*include("variable_handling.php");
 
 	if (isset($_SESSION['session_variables']) || isset($_SESSION['session_hints'])) {
 		$variables = unserialize($_SESSION['session_variables']);
@@ -11,7 +11,7 @@
 	} else {
 		$variables = new set_of_vars();
 		$hints = new set_of_vars();
-	}
+	}*/
 
 	if ($_POST['delete_all'] == "1") {
 		$variables = new set_of_vars();
@@ -37,9 +37,11 @@
 	if ($_POST['s'] == "submit_changes" || $_POST['s'] == "submit_changes_edit" || $_POST['s'] == "submit_changes_edit_hint") {
 
 		if($_POST['s'] == "submit_changes_edit"){
-			$variables->replace_variable($_POST['old_name'], $_POST['var_type'], $_POST['var_name'], $_POST['min'], $_POST['max']);
+			$variables->replace_variable($_POST['old_name'], $_POST['var_type'], $_POST['var_name'], $_POST['min'], $_POST['max'], $_POST['dec']);
+			header('Location: http://www.gast.it.uc3m.es/~jusanzm', true, 302);
 		} elseif (isset($_POST['var_name']) && $_POST['var_name'] != "") {
-			$variables->add_variable($_POST['var_type'], $_POST['var_name'], $_POST['min'], $_POST['max']);
+			$variables->add_variable($_POST['var_type'], $_POST['var_name'], $_POST['min'], $_POST['max'], $_POST['dec']);
+			header('Location: http://www.gast.it.uc3m.es/~jusanzm', true, 302);
 		} 
 
 		if ($_POST['s'] == "submit_changes_edit_hint") {
@@ -87,6 +89,7 @@
 	$_SESSION['solution_session'] = $solution_text;
 	$_SESSION['solution_error_session'] = $solution_error_text;
 	?> 
+
 	<!-- Example row of columns -->
 	<div class="row">
 		<div class="span7">
@@ -153,6 +156,17 @@
 														
 														<input type="text" class="input-small" value=<?php echo "\"".$properties[1]."\""; ?> name="min" id="min">
 														<input type="text" class="input-small" value=<?php echo "\"".$properties[2]."\""; ?> name="max" id="max">
+														<select class="span1" name="dec" id="dec">
+															<?php 
+															foreach (array(0, 1, 2, 3) as $key => $value) {
+																if ($value == $properties[3]) {
+																	echo "<option value=\"".$value."\" selected=\"selected\">".$value."</option>";
+																} else {
+																	echo "<option value=\"".$value."\">".$value."</option>";
+																}
+															}
+															?>
+														</select>
 														<input type="hidden" name="old_name" value=<?php echo "\"".$name."\""; ?> >
 													</td>
 													
@@ -187,6 +201,12 @@
 							<input type="text" class="input-small" placeholder='Variable name' name="var_name" id="var_name">
 							<input type="text" class="input-small" placeholder="Minimum" name="min" id="min">
 							<input type="text" class="input-small" placeholder="Maximum" name="max" id="max">
+							<select type="" class="span1" name="dec" id="dec">
+								<option>0</option>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+							</select>
 							<button type="submit" name="s" value="submit_changes" class="btn btn-success"><i class="icon-plus-sign icon-white"></i></button>
 						</form>
 						<!-- </div> -->
@@ -201,32 +221,36 @@
 						
 						<form class="" action="?p=home" method="post">
 							<h4>Title</h4>
-							<textarea class="span6 active_textbox" name="subj_text" id="subj_text" rows="1"><?php
+							<textarea class="span6" name="subj_text" id="subj_text" rows="1"><?php
 							if (isset($subject_text)) {
 								echo $subject_text;
 							}
 							?></textarea>
+							<br/>
 							<h4>Statement</h4>
-							<textarea class="span6 active_textbox" name="stat_text" id="stat_text" rows="5"><?php
+							<textarea class="span6 active_textbox" name="stat_text" id="stat_text" rows="5" onfocus="showeditor(this)"><?php
 							if (isset($statement_text)) {
 								echo $statement_text;
 							}
 							?></textarea>
+							<br/>
 							<h4>Question</h4>
-							<textarea class="span6" name="exer_text" id="exer_text" rows="5"><?php
+							<textarea class="span6 active_textbox" name="exer_text" id="exer_text" rows="5"><?php
 							if (isset($exercise_text)) {
 								echo $exercise_text;
 							}
 							?></textarea>
+							<br/>
 							<h4>Solution</h4>
 							<div class="row" style="padding-left: 30px">
-								<textarea class="span5" name="sol_text" id="sol_text" rows="2"><?php
+								<textarea class="span5 solution_textbox" name="sol_text" id="sol_text" rows="2"><?php
 								if (isset($solution_text)) {
 									echo $solution_text;
 								}
 								?></textarea>
 								<input type="text" class="input-small span1" placeholder="Error" <?php if ($solution_error_text != ""){ echo "value=\"".$solution_error_text."\""; } ?> name="sol_error_text" id="sol_error_text">
 							</div>
+							<br/>
 							<h3>Hints</h3>
 							<div class="well">
 								<h4>Current Hints</h4>
@@ -273,7 +297,7 @@
 																<?php echo $index+1; ?>
 															</td>
 															<td>
-																<textarea class="span5" name="editted_hin_text" id="eddited_hin_text" rows="2"><?php echo $hint; ?></textarea>
+																<textarea class="span5 active_textbox" name="editted_hin_text" id="eddited_hin_text" rows="2"><?php echo $hint; ?></textarea>
 																<input type="hidden" name="old_hint_index" value=<?php echo "\"".$index."\""; ?> >
 															</td>
 														</form>
@@ -292,7 +316,7 @@
 								} ?>
 
 								<h4>Add new hint</h4>
-								<textarea class="span6" name="hin_text" id="hin_text" rows="2"><?php
+								<textarea class="span6 active_textbox" name="hin_text" id="hin_text" rows="2"><?php
 							//if (isset($hints_text)) {
 							//	echo $hints_text;
 							//}
@@ -312,19 +336,20 @@
 					</ul>
 
 					<div id="myTabContent" class="tab-content">
+					
 						<div style="margin-left:-30px;" class="tab-pane active" id="preview">
-							<iframe class="span5" src="http://163.117.141.253:8000/exercises/aa.html" height="700" frameborder="0" ></iframe>
-
-							
+							<iframe class="span5" src="http://163.117.141.254:8000/exercises/aa.html#container" height="700" frameborder="0" ></iframe>					
 						</div>
-						<div class="tab-pane fade" id="code">
+						
+						<div class="tab-pane" id="code">
 							<textarea class="span5" rows="30"><?php process_and_parse(); ?></textarea>
 						</div>
+						
 					</div>
 					<br/>
 					<div class="row-fluid">
-						<form action="download.php" class="form-inline span1" style="width:80px;">
-							<button class="btn btn-success"><i class="icon-arrow-down icon-white"></i> Save</button>
+						<form action="download.php" class="form-inline" style="width:80px;">
+							<button class="btn btn-success"><i class="icon-arrow-down icon-white"></i> Download</button>
 						</form>
 						<form class="form-inline" action="?p=home" method="post" accept-charset="utf-8"> 
 							<input type="hidden" name="subj_text" id="subj_text" value="">

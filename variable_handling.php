@@ -1,10 +1,10 @@
 <?php
 class set_of_vars {
-    // Property declaration
+	// Property declaration
 	public $my_vars = array();
 	public $seed_count = 1;
 
-    // method declaration
+	// method declaration
 	public function get_my_vars() {
 		return $this->my_vars;
 	}
@@ -13,11 +13,11 @@ class set_of_vars {
 		return empty($this->my_vars);
 	}
 
-	public function add_variable($type_of_variable, $name, $min = 0, $max = 10){
+	public function add_variable($type_of_variable, $name, $min = 0, $max = 10, $decimals = 0){
 		if ($type_of_variable == "Number") {
-			$this->my_vars[$name] = "randRange(".$min.", ".$max.")";
+			$this->my_vars[$name] = "randRange(".$min.", ".$max.")".$this->step_string($decimals);
 		} elseif ($type_of_variable == "Person name") {
-			$this->my_vars[$name] = "person(".$this->seed_count.")";
+			$this->my_vars[$name] = "person(".$this->seed_count.")".$this->step_string($decimals);
 			$this->seed_count = $this->seed_count + 1;
 		} elseif ($type_of_variable == "Hint") {
 			array_push($this->my_vars, $name);
@@ -32,34 +32,40 @@ class set_of_vars {
 		}
 	}
 
-	public function replace_variable($old_name, $type_of_variable, $name, $min = 0, $max = 10){
+	public function replace_variable($old_name, $type_of_variable, $name, $min = 0, $max = 10, $decimals = 0){
 		foreach ($this->my_vars as $key => $value) {
 			if ($key != $old_name) {
 				$buffer[$key] = $value;
 			} else {
 				if ($type_of_variable == "Number") {
-					$buffer[$name] = "randRange(".$min.", ".$max.")";
+					$buffer[$name] = "randRange(".$min.", ".$max.")".$this->step_string($decimals);
 				} elseif ($type_of_variable == "Person name") {
-					$buffer[$name] = "person(".$this->seed_count.")";
+					$buffer[$name] = "person(".$this->seed_count.")".$this->step_string($decimals);
 					$this->seed_count = $this->seed_count + 1;
 				} elseif ($type_of_variable == "Hint") {
 					$buffer[$old_name] = $name;
 				}
 			}
-			$this->my_vars = $buffer;			
+			$this->my_vars = $buffer;
 		}
 	}
 
 	public function pretty_print($ugly_string) {
 
 		if (strpos($ugly_string, "randRange(") !== false ) {
-		//It should return something like "0, 10)"
+			//It should return something like "0, 10)"
+			$decimals = $this->how_many_decimals($ugly_string);
 			preg_match('/[a-zA-Z0-9_]+\((.*?)\)/', $ugly_string, $matches);
 			$array = explode(", ", $matches[1]);
-			echo "Random Number from ". $array[0] . " to " . $array[1];
+			if ($decimals == 1) {
+				echo "Random Number from ". $array[0] . " to " . $array[1] . " with " . $decimals . " decimal";
+			} else {
+				echo "Random Number from ". $array[0] . " to " . $array[1] . " with " . $decimals . " decimals";
+			}
+				
 		}
 		if (strpos($ugly_string, "person(") !== false ) {
-		//It should return something like "0, 10)"
+			//It should return something like "0, 10)"
 			preg_match('/[a-zA-Z0-9_]+\((.*?)\)/', $ugly_string, $matches);
 			echo "Random person name #". $matches[1];
 		}
@@ -69,19 +75,58 @@ class set_of_vars {
 	public function property_dump($ugly_string) {
 		$solution = array();
 		if (strpos($ugly_string, "randRange(") !== false ) {
-		//It should return something like "0, 10)"
+			$decimals = $this->how_many_decimals($ugly_string);
+			//It should return something like "0, 10)"
 			preg_match('/[a-zA-Z0-9_]+\((.*?)\)/', $ugly_string, $matches);
 			$arrayr = explode(", ", $matches[1]);
 			$solution = array_merge(array('Number'), (array)$arrayr);
+			$solution = array_merge($solution, (array)$decimals);
 
 		}
 		if (strpos($ugly_string, "person(") !== false ) {
-		//It should return something like "0, 10)"
+			//It should return something like "0, 10)"
 			preg_match('/[a-zA-Z0-9_]+\((.*?)\)/', $ugly_string, $matches);
 			$solution = array_merge(array('Person name'), array($matches[1]));
 		}
 
 		return $solution;
+	}
+
+	public function step_string($decimals) {
+		switch ($decimals) {
+			case 1:
+				return "+(randRange(0,9)/10)";
+			case 2:
+				return "+(randRange(0,9)/10)+(randRange(0,9)/100)";
+			case 3:
+				return "+(randRange(0,9)/10)+(randRange(0,9)/100)+(randRange(0,9)/1000)";
+				break;
+					
+			default:
+				return "";
+				break;
+		}
+	}
+
+	public function how_many_decimals($string) {
+		if (strpos($string, "+(randRange(0,9)/10)+(randRange(0,9)/100)+(randRange(0,9)/1000)") !== false) {
+			return 3;
+		}
+		if (strpos($string, "+(randRange(0,9)/10)+(randRange(0,9)/100)") !== false) {
+			return 2;
+		}
+		if (strpos($string, "+(randRange(0,9)/10)") !== false) {
+			return 1;
+		}
+		return 0;
+
+	}
+
+	public function is_it_a_number($string) {
+		if (strpos($string, "randRange(") !== false ) {
+			return true;
+		}
+		return false;
 	}
 }
 
