@@ -27,7 +27,7 @@ tinymce.create('tinymce.plugins.ExamplePlugin', {
                 if (isset($variables)) {
 					foreach ($variables->get_my_vars() as $name => $type_of_var) {
 						if($name != ""){
-							echo "mlb.add('" . $name . "', '<var>".$name."</var>&nbsp;');\n";		
+							echo "mlb.add('" . $name . "', '&nbsp;<var>".$name."</var>&nbsp;');\n";		
 						}			
 					}				
 				}
@@ -38,7 +38,42 @@ tinymce.create('tinymce.plugins.ExamplePlugin', {
 
                 // Return the new listbox instance
                 return mlb;
+            case 'mysmalllistbox':
+                var mlb2 = cm.createListBox('mysmalllistbox', {
+                     title : 'Variables',
+                     onselect : function(v) {
+                         //tinyMCE.activeEditor.windowManager.alert('Value selected:' + v);
+                    	//inserts the corresponding value at the cursor position
+                         tinyMCE.activeEditor.execCommand('mceInsertContent',false,v);
+                     }
+                });
+ 
+                // Add some values to the list box*/
+                <?php 
+                if (isset($_SESSION['session_variables']) || isset($_SESSION['session_hints'])) {
+                	$variables = unserialize($_SESSION['session_variables']);
+                	$hints = unserialize($_SESSION['session_hints']);
+                } else {
+                	$variables = new set_of_vars();
+                	$hints = new set_of_vars();
+                }
+                
+                if (isset($variables)) {
+					foreach ($variables->get_my_vars() as $name => $type_of_var) {
+						if($name != ""){
+							echo "mlb2.add('" . $name . "', '".$name."');\n";		
+						}			
+					}				
+				}
+				
+                ?>
+                
+                /*mlb.add('Variable 1', 'val1');
+                mlb.add('Variable 2', 'val2');
+                mlb.add('Varaible 3', 'val3');*/
 
+                // Return the new listbox instance
+                return mlb2;
             case 'mysplitbutton': 
                 var c = cm.createSplitButton('mysplitbutton', {
 			title : 'My split button',
@@ -94,18 +129,22 @@ tinymce.PluginManager.add('example', tinymce.plugins.ExamplePlugin);
 
 
 tinyMCE.init({
-    plugins : "asciimath,asciisvg,-example,equation,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,inlinepopups,autosave", // - tells TinyMCE to skip the loading of the plugin
+    plugins : "jsasciimath,asciimath,asciisvg,-example,equation,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,inlinepopups,autosave", // - tells TinyMCE to skip the loading of the plugin
     mode : "specific_textareas",
     editor_selector : "active_textbox",
 	theme : "advanced",
 	skin : "o2k7",
 	skin_variant : "silver",
-    //theme_advanced_buttons1 : ",bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright,justifyfull,bullist,numlist,undo,redo,link,unlink",
-    theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
-	
+    theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,formatselect,fontselect,fontsizeselect",
+    theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,|,undo,redo,|,link,unlink,image,code,|,insertdate,inserttime,|,forecolor,backcolor",
+    theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,fullscreen",
+	theme_advanced_buttons4 : "jsasciimathcharmap,asciimathcharmap,asciisvg,mylistbox,|,styleprops,visualchars,nonbreaking",
+	/*BACKUP
+	theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
     theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
     theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
 	theme_advanced_buttons4 : "asciimathcharmap,asciisvg,mylistbox,|,insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak,restoredraft",
+	*/
 	//theme_advanced_buttons4 : "asciimath,asciimathcharmap,asciisvg,mylistbox,|,insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak,restoredraft",
 	theme_advanced_toolbar_location : "top",
     theme_advanced_toolbar_align : "left",
@@ -116,14 +155,14 @@ tinyMCE.init({
     //theme_advanced_statusbar_location : "bottom"
 });
 tinyMCE.init({
-    plugins : "asciimath,-example,equation,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,inlinepopups,autosave", // - tells TinyMCE to skip the loading of the plugin
+    plugins : "jsasciimath,-example,equation,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,inlinepopups,autosave", // - tells TinyMCE to skip the loading of the plugin
     mode : "specific_textareas",
     editor_selector : "solution_textbox",
 	theme : "advanced",
 	skin : "o2k7",
 	skin_variant : "silver",
     //theme_advanced_buttons1 : ",bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright,justifyfull,bullist,numlist,undo,redo,link,unlink",
-    theme_advanced_buttons1 : "asciimathcharmap, mylistbox,|,code",
+    theme_advanced_buttons1 : "jsasciimathcharmap, mysmalllistbox,|,code",
     AScgiloc : 'http://www.imathas.com/editordemo/php/svgimg.php',			      //change me  
     ASdloc : 'http://www.imathas.com/editordemo/jscripts/tiny_mce/plugins/asciisvg/js/d.svg',  //change me  	
         

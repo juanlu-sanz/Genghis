@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=7" />
+	<title>Math Symbols</title>
+	<script type="text/javascript" src="../../tiny_mce_popup.js"></script>
+	<script type="text/javascript" src="js/amcharmap.js"></script>
+	<script type="text/javascript" src="js/ASCIIMathMLwFallback.js"></script>
+	<style type="text/css">
+	td.character {
+	    font-family: Times,serif;
+	    font-size: 14px;
+	    font-weight: bold;
+	    text-align: center;
+	    background: #FFF;
+	    padding: 4px;
+	}
+	
+	td.character-hilite {
+	    background: Highlight;
+	    color: HighlightText;
+	}
+	</style>
+<script type="text/javascript">
+var oldView = null;
+function View( td, character )               // preview character
+{
+    if (oldView)
+        oldView.className = oldView.className.replace(/\s+character-hilite/, '');
+
+    if (td) {
+        (oldView = td).className += " character-hilite";
+        td.setAttribute("title",character);  // added by Peter Jipsen
+    }
+}
+
+</script>
+<base target="_self" />
+</head>
+<body>
+
+<table border="0" cellspacing="1" cellpadding="0" width="100%" style="cursor: pointer; background: #ADAD9C; border: 1px inset;">
+<tr>
+<td class="character" onMouseOver="View(this,'sin(x)')" onClick="javascript:jsAsciimathDialog.set('sin(x)')">`sin(x)`</td>
+<td class="character" onMouseOver="View(this,'arcsin(x)')" onClick="javascript:jsAsciimathDialog.set('arcsin(x)')">`arcsin(x)`</td>
+<td class="character" onMouseOver="View(this,'e^(x)')" onClick="javascript:jsAsciimathDialog.set('e^(x)')">`e^(x)`</td>
+<td class="character" onMouseOver="View(this,'x^(m)')" onClick="javascript:jsAsciimathDialog.set('x^(m)')">`x^(m)`</td>
+</tr><tr>
+<td class="character" onMouseOver="View(this,'cos(x)')" onClick="javascript:jsAsciimathDialog.set('cos(x)')">`cos(x)`</td>
+<td class="character" onMouseOver="View(this,'arccos(x)')" onClick="javascript:jsAsciimathDialog.set('arccos(x)')">`arccos(x)`</td>
+<td class="character" onMouseOver="View(this,'ln(x)')" onClick="javascript:jsAsciimathDialog.set('ln(x)')">`ln(x)`</td>
+<td class="character" onMouseOver="View(this,'sqrt(x)')" onClick="javascript:jsAsciimathDialog.set('sqrt(x)')">`sqrt(x)`</td>
+</tr><tr>
+<td class="character" onMouseOver="View(this,'tan(x)')" onClick="javascript:jsAsciimathDialog.set('tan(x)')">`tan(x)`</td>
+<td class="character" onMouseOver="View(this,'arctan(x)')" onClick="javascript:jsAsciimathDialog.set('arctan(x)')">`arctan(x)`</td>
+<td class="character" onMouseOver="View(this,'e')" onClick="javascript:jsAsciimathDialog.set('e')">`e`</td>
+<td class="character" onMouseOver="View(this,'pi')" onClick="javascript:jsAsciimathDialog.set('pi')">`pi`</td>
+</tr>
+</table>
+
+</body>
+</html>

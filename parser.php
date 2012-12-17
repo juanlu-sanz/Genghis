@@ -1,5 +1,53 @@
 <?php
 
+include("ParensParser.php");
+
+function parse_mathjax_to_js($string) {
+	if (strrpos($string, "<span class=\"AM\">`")){
+
+		$location = strrpos($string, "<span class=\"AM\">`");
+			
+		$start_of_latex = $location + 18;
+		$end_of_latex = strrpos($string, "`</span>");
+		$latex_len = $end_of_latex - $start_of_latex;
+
+		$actual_code_ML = substr ($string, $start_of_latex, $latex_len );
+		var_dump($actual_code_ML);
+	}
+	$p = new ParensParser();
+	$array_result = $p->parse($actual_code_ML);
+	return recursive_parsing($array_result);
+}
+
+function recursive_parsing($arrays) {
+	global $variables;
+	$final_string="";
+	$power = 0;
+	foreach ($arrays as $index => $piece){
+		if (!is_array($piece)) {
+			if ($piece[strlen($piece)-1] == '^'){
+				$trimmed = substr_replace($piece ,"",-1);
+				$final_string .= "pow(". $trimmed . "," . recursive_parsing($arrays[$index+1]) .")";
+				$power=1;
+			} elseif ($piece === "pi"){
+				$final_string .= "Math.PI";
+			} elseif (array_key_exists($piece, $variables->get_my_vars() )) {
+				$final_string .= "<var>".$piece."</var>";
+			}else {
+				$final_string .= $piece;
+			}
+		} else {
+			if ($power){
+				$power = 0;
+			} else {
+				$final_string .= '(' . recursive_parsing($piece) . ')';
+			}
+		}
+
+	}
+	return $final_string;
+}
+
 function parse_latex_and_solution($input_string) {
 	$final_string = $input_string;
 	while (strrpos($final_string, "<img src=\"http://latex.codecogs.com/gif.latex?")){
@@ -58,10 +106,13 @@ function process_and_parse(){
 	$var_id_code = "\t<var id=\"";
 	$end_var_code = "</var>\n\t";
 
-	$problem_code = "</div>\n\n\t<div class=\"problems\">\n\t\t<div>\n\t\t\t<div class=\"problem\">\n\t\t\t\t<p>";
-	$question_code = "</p>\n\t\t\t</div>\n\t\t\t<div class=\"question\">\n\t\t\t\t<p>";
+	$problem_code = "</div>\n\n\t<div class=\"problems\">\n\t\t<div>\n\t\t\t<div class=\"problem\">\n\t\t\t\t";
+	$question_code = "\n\t\t\t</div>\n\t\t\t<div class=\"question\">\n\t\t\t\t<p>";
 	$solution_code1 = "</p>\n\t\t\t</div>\n\t\t\t<div class=\"solution\" data-type=\"decimal\">";
 	$solution_code12 = "</p>\n\t\t\t</div>\n\t\t\t<div class=\"solution\" data-inexact data-max-error=\"";
+	/*	$question_code = "</p>\n\t\t\t</div>\n\t\t\t<div class=\"question\">\n\t\t\t\t<p>";
+	 $solution_code1 = "</p>\n\t\t\t</div>\n\t\t\t<div class=\"solution\" data-type=\"decimal\">";
+	$solution_code12 = "</p>\n\t\t\t</div>\n\t\t\t<div class=\"solution\" data-inexact data-max-error=\"";*/
 	$solution_code2 = "\" data-type=\"decimal\">";
 	$hints_code = "</div>\n\t\t</div>\n\t</div>\n\n\t<div class=\"hints\">\n";
 
@@ -92,9 +143,9 @@ function process_and_parse(){
 	$super_String = $super_String . $problem_code.find_and_parse_latex($_SESSION['statement_session']).$question_code.find_and_parse_latex($_SESSION['text_session']);
 
 	if ($_SESSION['solution_error_session'] != "") {
-		$super_String = $super_String . $solution_code12 . $_SESSION['solution_error_session'] .$solution_code2.$_SESSION['solution_session'].$hints_code;
+		$super_String = $super_String . $solution_code12 . $_SESSION['solution_error_session'] .$solution_code2.parse_mathjax_to_js($_SESSION['solution_session']).$hints_code;
 	} else {
-		$super_String = $super_String . $solution_code1 .$_SESSION['solution_session'].$hints_code;
+		$super_String = $super_String . $solution_code1 .parse_mathjax_to_js($_SESSION['solution_session']).$hints_code;
 	}
 
 	if ($hints->get_my_vars()) {
