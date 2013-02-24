@@ -32,7 +32,7 @@ function getTable() {
             echo '<span class="table_edit">
                 <form action="#" method="post"><input type="hidden" name="edit_var_id" value="'.$rowwhole['variable_id'].'"><input type="image" src="./libs/img/edit_icon.png" border="0" ALT="Submit Form"></form>
                 </span><span class="table_delete">
-                <form action="#" method="post"><input type="hidden" name="delete_var_id" value="'.$rowwhole['variable_id'].'"><input type="image" src="http://163.117.152.240/elearning/images/actions/delete.png" border="0" ALT="Submit Form"></form>
+                <form action="#" method="post"><input type="hidden" name="delete_var_id" value="'.$rowwhole['variable_id'].'"><input type="image" src="./libs/img/delete.png" border="0" ALT="Submit Form"></form>
                 </span>';
             echo '<span class="table_name">' . $rowwhole['variable_name'] . '</span>';
             //Save the name!
@@ -75,7 +75,7 @@ function getProperties($variableId, $variableType) {
 function newVariable(){
     echo "<div class=\"elem\" style=\"display: none;\">";
     echo '<form action="./libs/insertVariable.php" method="post">';
-    echo '<span class="table_edit" style="width: 78px;"><input type="image" src="http://163.117.152.240/elearning/images/actions/add.png" border="0" ALT="Submit Form"></span>';
+    echo '<span class="table_edit" style="width: 78px;"><input type="image" src="./libs/img/add.png" border="0" ALT="Submit Form"></span>';
     echo '<span class="table_name"><input type="text" name="new_var_name" id="new_var_name" style="width:90px;"></span>';
     echo '<span class="table_properties">
         N&uacute;mero

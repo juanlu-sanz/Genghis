@@ -14,7 +14,7 @@
 <!-- CSS -->
 <link rel="stylesheet" href="./libs/jqueryUI/css/custom-jqueryui-theme/jquery-ui-1.9.2.custom.min.css" type="text/css"></link>
 <link rel="stylesheet" href="./libs/css/puvikhan.css" type="text/css"></link>
-<link rel="stylesheet" href="http://163.117.152.240/elearning/styles/open-sans-fontfacekit/stylesheet.css" type="text/css" media="screen"></link>
+<link rel="stylesheet" href="./libs/css/fonts/stylesheet.css" type="text/css" media="screen"></link>
 
 <!-- JS -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>

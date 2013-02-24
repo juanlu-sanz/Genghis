@@ -44,7 +44,7 @@ function getHintTable() {
                     </span><span class="table_delete">
                     <form action="#" method="post">
                     <input type="hidden" name="delete_var_id" value="'.$hint[0].'">
-                    <input type="image" src="http://163.117.152.240/elearning/images/actions/delete.png" border="0" ALT="Submit Form">
+                    <input type="image" src="../libs/img/delete.png" border="0" ALT="Submit Form">
                     </form>
                     </span>';
                 echo '<span class="table_name">' . $or . '</span>';
@@ -73,7 +73,7 @@ function newhint(){
     }
     echo "<div class=\"elem\" style=\"display: none;\">";
     echo '<form action="./libs/insertHint.php" method="post">';
-    echo '<span class="table_edit" style="width: 78px;"><input type="image" src="http://163.117.152.240/elearning/images/actions/add.png" border="0" ALT="Submit Form"></span>';
+    echo '<span class="table_edit" style="width: 78px;"><input type="image" src="../libs/img/add.png" border="0" ALT="Submit Form"></span>';
     echo '<span class="table_properties">';
     echo '<textarea class="tinymce" rows="3" cols="80" name="new_hint_text" id="new_hint_text"></textarea>';
     echo '<input type="hidden" name="hint_order" value="'.$order.'">';
@@ -86,7 +86,7 @@ function newhint(){
 function edithint($order, $id, $text){
     echo "<div class=\"elem\" style=\"display: none;\">";
     echo '<form action="./libs/insertHint.php" method="post">';
-    echo '<span class="table_edit" style="width: 78px;"><input type="image" src="http://163.117.152.240/elearning/images/actions/add.png" border="0" ALT="Submit Form"></span>';
+    echo '<span class="table_edit" style="width: 78px;"><input type="image" src="../libs/img/add.png" border="0" ALT="Submit Form"></span>';
     echo '<span class="table_properties">
         <textarea class="tinymce" rows="3" cols="80" name="new_hint_text" id="new_hint_text">'.$text.'</textarea>
         <input type="hidden" name="hint_order" value="'.$order.'">
