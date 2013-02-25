@@ -42,7 +42,7 @@ function getExerciseTable(){
                     <span class="table_delete">
                     <form action="#" method="post">
                     <input type="hidden" name="delete_exercise_id" value="'.$current_exercise['question_id'].'">
-                    <input type="image" src="http://163.117.152.240/elearning/images/actions/delete.png" border="0" ALT="Submit Form">
+                    <input type="image" src="./libs/img/delete.png" border="0" ALT="Submit Form">
                     </form>
                     </span>';
                 echo '<span class="table_name">' . $current_exercise['question_title'] . '</span>';
