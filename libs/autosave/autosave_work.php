@@ -9,7 +9,7 @@ if (!$con)
 {
 	die('Could not connect: ' . mysql_error());
 }
-mysql_select_db("elearning", $con);
+mysql_select_db("khan_exercises", $con);
 $check = 0;
 if ($_POST['check']=="true") $check = 1;
 else $check = 0;

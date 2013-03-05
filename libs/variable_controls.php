@@ -74,7 +74,7 @@ function getProperties($variableId, $variableType) {
  */
 function newVariable(){
     echo "<div class=\"elem\" style=\"display: none;\">";
-    echo '<form action="./libs/insertVariable.php" method="post">';
+    echo '<form action="./libs/insertVariable.php?question_id='.$_SESSION['question_id'].'" method="post">';
     echo '<span class="table_edit" style="width: 78px;"><input type="image" src="./libs/img/add.png" border="0" ALT="Submit Form"></span>';
     echo '<span class="table_name"><input type="text" name="new_var_name" id="new_var_name" style="width:90px;"></span>';
     echo '<span class="table_properties">
@@ -102,8 +102,8 @@ function editVariable($current){
     $result = mysql_fetch_array($resultwhole);
 
     echo "<div class=\"elem\" style=\"display: none;\">";
-    echo '<form action="./libs/editVariable.php" method="post">';
-    echo '<span class="table_edit" style="width: 78px;"><input type="image" src="http://163.117.152.240/elearning/images/actions/add.png" border="0" ALT="Submit Form"></span>';
+    echo '<form action="./libs/editVariable.php?question_id='.$_GET['question_id'].'" method="post">';
+    echo '<span class="table_edit" style="width: 78px;"><input type="image" src="http://163.117.152.240/khan_exercises/images/actions/add.png" border="0" ALT="Submit Form"></span>';
     echo '<span class="table_name"><input type="text" name="new_var_name" value="' . $current['variable_name'] . '" id="new_var_name" style="width:90px;"></span>';
     echo '<span class="table_properties">
         N&uacute;mero
@@ -133,7 +133,7 @@ function editVariable($current){
 }
 
 function deleteVariable($idToBeDeleted) {
-    $query = "DELETE FROM `elearning`.`khan_variable` WHERE `variable_id`='" .$idToBeDeleted. "';";
+    $query = "DELETE FROM `khan_exercises`.`khan_variable` WHERE `variable_id`='" .$idToBeDeleted. "';";
     $resultwhole = mysql_query($query);
 }
 

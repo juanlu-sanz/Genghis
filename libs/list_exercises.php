@@ -9,22 +9,20 @@ function getExerciseTable(){
     echo '</div>';
      */
     $query = "SELECT 
-        elearning.khan_exercise.exercise_id,
-        elearning.khan_exercise.exercise_author,
-        elearning.khan_exercise.exercise_department,
-        elearning.khan_question.question_id,
-        elearning.khan_question.question_title
-        FROM elearning.khan_question
-        INNER JOIN elearning.khan_exercise
-        ON elearning.khan_question.question_exercise = elearning.khan_exercise.exercise_id
-        WHERE elearning.khan_exercise.exercise_id = 1;";
+        khan_exercises.khan_question.question_id,
+        khan_exercises.khan_question.question_author,
+        khan_exercises.khan_question.question_title
+        FROM
+        khan_exercises.khan_question
+        WHERE
+        khan_exercises.khan_question.question_author = 'jusanzm';";
     $exercise_list = mysql_query($query);
 
 
 
     if (empty($exercise_list)) {
         echo "No hay ejercicios, ¡crea uno!";
-        //newhint();
+        newExercise();
     } else {
         //It doesn't seem to be empty, let's iterate all exercises.
         while ($current_exercise = mysql_fetch_array($exercise_list)){
@@ -33,7 +31,7 @@ function getExerciseTable(){
             } else {
                 echo "<div class=\"elem\" style=\"display: none;\">";
                 echo '<span class="table_edit">
-                    <form action="http://www.gast.it.uc3m.es/~jusanzm/" method="post">
+                    <form action="http://www.gast.it.uc3m.es/~jusanzm/" method="get">
                     <input type="hidden" id="question_id" name="question_id" value="'.$current_exercise['question_id'].'">
                     <input type="image" src="./libs/img/edit_icon.png" border="0" ALT="Submit Form">
                     </form>
@@ -52,6 +50,37 @@ function getExerciseTable(){
                 $or = $or+1;
             }
         }
+        newExercise();
     }
 
 }
+
+function newExercise(){
+    echo "<div class=\"elem\" style=\"display: none;\">";
+    echo '<form action="./libs/createExercise.php" method="post">';
+    echo '<span class="table_properties">';
+    echo '<input type="submit" value="Nuevo Ejercicio">';
+    echo '</span>';
+    echo "</form></div>";
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -2,7 +2,7 @@
 
 /**
  * SDIC API CLIENT E-LEARNING
- * VERSION: 0.1B
+ * VERSION: 1.0.1
  * AUTHOR: Antonio Morillo Callejon <amorillo@di.uc3m.es>
  */
 
@@ -16,7 +16,7 @@
 	class SDICApiClientELearning {
 
 		var $key;
-		var $server = 'http://163.117.152.240/elearning/api/do.php';		
+		var $server = 'https://baal.uc3m.es/gel/api/do.php';		
 
 		private function exec($params) {
 			$url_call = "{$this->server}?key={$this->key}";			
@@ -27,10 +27,10 @@
      		curl_setopt($cl, CURLOPT_FOLLOWLOCATION, false);
 
      		curl_setopt($cl, CURLOPT_URL, str_replace(" ", "%20", $url_call));
-     
+ 
 			$data = curl_exec($cl);
-	    	$info = curl_getinfo($cl);
-     		curl_close($cl);
+    		$info = curl_getinfo($cl);
+ 			curl_close($cl);
 
      		if ($data === false) throw new Exception("[SDIC API CLIENT E-LEARNING] Error executing $url_call.");
      		return json_decode($data);
@@ -40,11 +40,12 @@
 			$this->key = $key;
 		}
 
-		function getCourses($platform = NULL) {
+		function getCourses($platform_id = NULL, $user_uid = NULL) {
 			return $this->exec(
 				array(
 					"action" => "getAll-cCourse",
-					"platform" => $platform
+					"platform" => $platform_id,
+					"uid" => $user_uid
 					)
 				);
 		}

@@ -8,7 +8,7 @@
 <meta name="author" content="jusanzm@it.uc3m.es"></meta>
 <meta name="description" content="Genghis, la herramienta para crear ejercicios de Khan Academy"></meta>
 <meta charset="utf-8" />
-<link rel="icon" type="image/png" href="http://163.117.152.240/elearning/images/favicon.ico">
+<link rel="icon" type="image/png" href="http://163.117.152.240/khan_exercises/images/favicon.ico">
 
 
 <!-- CSS -->
@@ -134,7 +134,7 @@ function loadScroll(){ // added function
 $(document).ready(function() {
     $("div.elem").click(function() {			
         if ($(this).attr("id")) {
-            location.href = 'http://163.117.152.240/elearning/?class=admin&action=info&elem=' + $(this).attr("id");				
+            location.href = 'http://163.117.152.240/khan_exercises/?class=admin&action=info&elem=' + $(this).attr("id");				
         }
     });
     $("div.course").click(function() {
@@ -168,7 +168,7 @@ $(document).ready(function() {
 <?php
 include 'configs.php';
         /*	try {
-                require_once("./libs/sdic_api_client_elearning.class.php");
+                require_once("./libs/sdic_api_client_khan_exercises.class.php");
                 $api = new SDICApiClientELearning();
                 $api->assignKey(DEVELOPER_KEY);
             } catch (Exception $e) {
@@ -187,7 +187,11 @@ include 'configs.php';
 
 
 //DEBUGGING! WILL BE REMOVED!
-$_SESSION['question_id'] = 1;
+if (isset($_REQUEST['question_id'])) {
+    $_SESSION['question_id'] = $_REQUEST['question_id'];
+}
+
+
 /*if(isset($_POST['question_id'])){
     $_SESSION['question_id'] = $_POST['question_id'];
     session_write_close(); 
@@ -202,7 +206,7 @@ echo '<pre>';
 if(isset($_POST)){print_r($_POST);}
 if(isset($_SESSION)){print_r($_SESSION);}
 echo '</pre>';
-*/
+ */
 // Let's initialize the Database (gets parameters from congifs.php)
 include('configs.php');
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASS);
@@ -211,7 +215,7 @@ if (!$con)
 {
     die('Could not connect: ' . mysql_error());
 }
-mysql_select_db("elearning", $con);
+mysql_select_db("khan_exercises", $con);
 //Page handling
 if ($_GET['page'] != '') {
     $currentActivePages = array('error', 'FillInTheBlank', 'list', 'login');
