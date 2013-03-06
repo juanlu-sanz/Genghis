@@ -1,3 +1,9 @@
+<?php
+if (isset($_GET['userKey'])) {
+    setcookie("user", $_GET['userKey'] , time()+3600);
+    header('Location: http://163.117.69.19/genghis/');
+}
+ ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -26,8 +32,6 @@
 <script type="text/javascript">
 var AMTcgiloc = "http://www.imathas.com/cgi-bin/mimetex.cgi";  		//change me
 </script>
-<!--<script type="text/javascript" src="./libs/autosave/javascript/autosave_init.js"></script>-->
-
 
 
 
@@ -99,7 +103,7 @@ function saveScroll(){ // added function
 
     Data2= varia + "_" + title + "_" + state + "_" + solut + "_" + hints;
     // Data2= "0_0_1_0_0";
-    setCookie(cookieName2,Data2,expdate);
+   setCookie(cookieName2,Data2,expdate);
 }
 
 function loadScroll(){ // added function
@@ -132,11 +136,12 @@ function loadScroll(){ // added function
 
 <script>
 $(document).ready(function() {
-    $("div.elem").click(function() {			
-        if ($(this).attr("id")) {
+   /* $("div.elem").click(function() {			
+       if ($(this).attr("id")) {
             location.href = 'http://163.117.152.240/khan_exercises/?class=admin&action=info&elem=' + $(this).attr("id");				
         }
-    });
+});
+    */
     $("div.course").click(function() {
         $(this).toggleClass("active");
         if ($("span.toggle", $(this)).length == 0) return;
@@ -166,49 +171,13 @@ $(document).ready(function() {
         <div id="content">
 
 <?php
-include 'configs.php';
-        /*	try {
-                require_once("./libs/sdic_api_client_khan_exercises.class.php");
-                $api = new SDICApiClientELearning();
-                $api->assignKey(DEVELOPER_KEY);
-            } catch (Exception $e) {
-                echo "Exception: ".$e->getMessage();
-            }
 
-
-            $user_key = $_REQUEST[ÒuserÓ];
-            $user = $api->getUser($user_key);
-            echo '<pre>';
-            print_r($user);
-        echo '</pre>';*/
-
-
-
-
-
-//DEBUGGING! WILL BE REMOVED!
-if (isset($_REQUEST['question_id'])) {
-    $_SESSION['question_id'] = $_REQUEST['question_id'];
-}
-
-
-/*if(isset($_POST['question_id'])){
-    $_SESSION['question_id'] = $_POST['question_id'];
-    session_write_close(); 
-    echo '     
-        <form action="http://www.gast.it.uc3m.es/~jusanzm/" method="post">
-        <input type="hidden" id="question_id" name="question_id" value="'.$_POST['question_id'].'">
-        </form>
-        ';
-}
-
-echo '<pre>';
-if(isset($_POST)){print_r($_POST);}
-if(isset($_SESSION)){print_r($_SESSION);}
-echo '</pre>';
+/*
+ * ------- CONFIGS ---------
  */
-// Let's initialize the Database (gets parameters from congifs.php)
-include('configs.php');
+
+include 'configs.php';
+
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASS);
 
 if (!$con)
@@ -216,16 +185,46 @@ if (!$con)
     die('Could not connect: ' . mysql_error());
 }
 mysql_select_db("khan_exercises", $con);
-//Page handling
-if ($_GET['page'] != '') {
-    $currentActivePages = array('error', 'FillInTheBlank', 'list', 'login');
-    if (in_array($_GET['page'], $currentActivePages)) {
-        include('controllers/' . $_GET['page'] . '.php');;
+
+//$_REQUEST["user"] = "0a9b8005-8590-11e2-8670-005056933c20";
+
+
+
+try {
+    require_once("./libs/sdic_api_client_elearning.class.php");
+    $api = new SDICApiClientELearning();
+
+    $api->assignKey("ba4f86ea-8592-11e2-8670-005056933c20");
+} catch (Exception $e) {
+    echo "Exception: ".$e->getMessage();
+}
+$user = $api->getUser($_COOKIE["user"]);
+$logoutURL =$api->getLogoutURL();
+$platforms = $api->getPlatforms();
+$departments = $api->getDepartments();
+$courses = $api->getCourses(18, $user->results->uid);
+
+
+
+/* ----- END OF CONFIGS ------*/
+
+if (isset($_REQUEST['question_id'])) {
+    $_SESSION['question_id'] = $_REQUEST['question_id'];
+
+    //Page handling
+    if ($_GET['page'] != '') {
+        $currentActivePages = array('error', 'FillInTheBlank', 'list', 'login');
+        if (in_array($_GET['page'], $currentActivePages)) {
+            include('controllers/' . $_GET['page'] . '.php');;
+        } else {
+            include('controllers/error.php');
+        }
     } else {
-        include('controllers/error.php');
+        include("controllers/FillInTheBlank.php");
     }
+
 } else {
-    include("controllers/FillInTheBlank.php");
+    include("controllers/list.php");
 }
 ?>
 

@@ -16,7 +16,7 @@
 	class SDICApiClientELearning {
 
 		var $key;
-		var $server = 'https://baal.uc3m.es/gel/api/do.php';		
+		var $server = 'http://163.117.69.19/gel/api/do.php';		
 
 		private function exec($params) {
 			$url_call = "{$this->server}?key={$this->key}";			

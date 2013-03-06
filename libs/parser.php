@@ -204,7 +204,12 @@ function process_and_parse(){
 
     $super_String = $super_String .  $end_hints_and_file_code;
     echo $super_String;
-    $fh = fopen("./Khan Academy/code/khanacademy-stable/khan-exercises/exercises/aa.html", 'w') or exit("Unable to open file!");
+/*    $success = chmod("./Khan-exercises/exercises/aa.html", 0755);
+    if (!$success) {
+        echo "Can't change permissions!";
+    }
+ */
+    $fh = fopen("./khan-exercises/exercises/aa.html", 'w') or exit("Unable to open file!");
     fwrite($fh, $super_String);
     fclose($fh);
 }

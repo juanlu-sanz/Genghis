@@ -26,7 +26,7 @@ getTable();
             </div>
 
             <!-- ---------------------- TITLE ---------------------- -->
-            <form action="libs/autosave/autosave_work.php" method="post" onsubmit="tinyMCE.triggerSave(false, true);">
+            <form action=<?php echo '"libs/autosave/autosave_work.php?question_id='.$_GET['question_id'].'"'; ?> method="post" onsubmit="tinyMCE.triggerSave(false, true);">
                 <div class="course-wrapper">
                 <div class="course">
                         <span class="toggle more"></span> <span class="title">Título</span>
@@ -94,10 +94,7 @@ getHintTable();
     </div>
     <!-- End of tab1 (exercise creation) -->
     <div id="tabs-2">
-        <!-- <p onClick='document.getElementById("ifr").src="http://163.117.141.254:8000/exercises/aa.html";'>Preview</p>-->
-        <!--<button onclick="document.getElementsById('ifr')[0].src=document.getElementsByName('Right')[0].src;">Refresh Iframe</button>-->
-        <iframe id="ifr" src="http://163.117.141.254:8000/exercises/aa.html" height="700" width="850" seamless></iframe>			
-        <!--  <iframe name="Right" src="http://163.117.141.254:8000/exercises/aa.html" height="700" width="850" seamless></iframe>		-->	
+        <iframe id="ifr" src="http://163.117.69.19:8000/exercises/aa.html" height="700" width="850" seamless></iframe>			
 
     </div>
     <!-- End of tab2 (exercise preview) -->
