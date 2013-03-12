@@ -41,6 +41,12 @@ function View( td, character )               // preview character
 
 <table border="0" cellspacing="1" cellpadding="0" width="100%" style="cursor: pointer; background: #ADAD9C; border: 1px inset;">
 <tr>
+<td class="character" onMouseOver="View(this,'+')" onClick="javascript:jsAsciimathDialog.set('+')">`+`</td>
+<td class="character" onMouseOver="View(this,'-')" onClick="javascript:jsAsciimathDialog.set('-')">`-`</td>
+<td class="character" onMouseOver="View(this,'*')" onClick="javascript:jsAsciimathDialog.set('*')">`*`</td>
+<td class="character" onMouseOver="View(this,'/')" onClick="javascript:jsAsciimathDialog.set('/')">`/`</td>
+</tr>
+<tr>
 <td class="character" onMouseOver="View(this,'sin(x)')" onClick="javascript:jsAsciimathDialog.set('sin(x)')">`sin(x)`</td>
 <td class="character" onMouseOver="View(this,'arcsin(x)')" onClick="javascript:jsAsciimathDialog.set('arcsin(x)')">`arcsin(x)`</td>
 <td class="character" onMouseOver="View(this,'e^(x)')" onClick="javascript:jsAsciimathDialog.set('e^(x)')">`e^(x)`</td>

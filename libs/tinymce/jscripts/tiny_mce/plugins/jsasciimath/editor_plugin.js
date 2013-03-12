@@ -64,7 +64,7 @@
 				ed.windowManager.open({
 					file : url + '/amcharmap.htm',
 					width : 330 + parseInt(ed.getLang('jsasciimathdlg.delta_width', 0)),
-					height : 100 + parseInt(ed.getLang('jsasciimathdlg.delta_height', 0)),
+					height : 144440 + parseInt(ed.getLang('jsasciimathdlg.delta_height', 0)),
 					inline : 1
 				}, {
 					plugin_url : url, // Plugin absolute URL

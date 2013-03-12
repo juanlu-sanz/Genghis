@@ -36,14 +36,14 @@ case 'mysmalllistbox':
                 tinyMCE.activeEditor.execCommand('mceInsertContent',false,v);
             }
     });
- <?php 
+<?php 
 foreach ($vars as $id => $properties){
     if($properties['name'] != ""){
-        echo "mlb2.add('" . $properties['name'] . "', '&nbsp;".$properties['name']."&nbsp;');\n";
+        echo "mlb2.add('" . $properties['name'] . "', '[".$properties['name']."]');\n";
     }
 }
 ?>   
-    
+
     return mlb2;
 case 'mysplitbutton': 
     var c = cm.createSplitButton('mysplitbutton', {
