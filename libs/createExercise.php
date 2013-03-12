@@ -14,8 +14,6 @@ try {
 $user = $api->getUser($_COOKIE["user"]);
 $courses = $api->getCourses(NULL, $user->results->uid);
 
-print_r($_POST);
-
 include('../configs.php');
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASS);
 
@@ -27,7 +25,7 @@ $query = "INSERT INTO
     `khan_exercises`.`khan_question` 
     (`question_author`, `question_course`) 
     VALUES 
-    ('".$user->results->uid."', '".$courses->results[0]->id."');";
+    ('".$_COOKIE['user']."', '".$courses->results[0]->id."');";
 
 //echo $query;
 

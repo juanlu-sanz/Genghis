@@ -13,7 +13,7 @@ function getHintTable() {
     echo '	<span class="table_properties">Texto</span>';
     echo '</div>';
 
-    $resultwhole = mysql_query("SELECT * FROM khan_hint WHERE hint_question=" . $_SESSION['question_id']);
+    $resultwhole = mysql_query("SELECT * FROM khan_hint WHERE hint_question=" . $_GET['question_id']);
 
     while ($rowwhole = mysql_fetch_array($resultwhole)){
         //Do we have to edit it?
@@ -72,7 +72,7 @@ function newhint(){
         $order = max($hintNames);
     }
     echo "<div class=\"elem\" style=\"display: none;\">";
-    echo '<form action="./libs/insertHint.php" method="post">';
+    echo '<form action="./libs/insertHint.php?question_id='.$_GET['question_id'].'" method="post">';
     echo '<span class="table_edit" style="width: 78px;"><input type="image" src="./libs/img/add.png" border="0" ALT="Submit Form"></span>';
     echo '<span class="table_properties">';
     echo '<textarea class="tinymce" rows="3" cols="80" name="new_hint_text" id="new_hint_text"></textarea>';
@@ -85,7 +85,7 @@ function newhint(){
  */
 function edithint($order, $id, $text){
     echo "<div class=\"elem\" style=\"display: none;\">";
-    echo '<form action="./libs/insertHint.php" method="post">';
+    echo '<form action="./libs/insertHint.php?question_id='.$_GET['question_id'].'" method="post">';
     echo '<span class="table_edit" style="width: 78px;"><input type="image" src="./libs/img/add.png" border="0" ALT="Submit Form"></span>';
     echo '<span class="table_properties">
         <textarea class="tinymce" rows="3" cols="80" name="new_hint_text" id="new_hint_text">'.$text.'</textarea>

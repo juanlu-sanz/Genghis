@@ -18,7 +18,7 @@ $qstring = "UPDATE `khan_variable` SET
     `variable_name` = '" . $_POST['new_var_name'] . "' ,
     `variable_type` = '" . $_POST['new_var_type'] . "' 
     WHERE variable_id ='" . $_POST['edit_var_id'] . "';";
-
+//echo $qstring;
 mysql_query($qstring);
 //Find float/integer table and insert properties
 if ($_POST['new_var_type']=='float'){
@@ -36,6 +36,8 @@ if ($_POST['new_var_type']=='float'){
         WHERE integer_variable ='" . $_POST['edit_var_id'] . "';";
 
 }
+//echo '<br/>';
+//echo $qstring;
 mysql_query($qstring);
 //echo '<br />Last string is '.mysql_insert_id();
 header('Location: '.URL.'?question_id='.$_GET['question_id']);

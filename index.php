@@ -3,7 +3,10 @@ if (isset($_GET['userKey'])) {
     setcookie("user", $_GET['userKey'] , time()+3600);
     header('Location: http://163.117.69.19/genghis/');
 }
- ?>
+if (!isset($_COOKIE['user']) & !isset($_GET['userKey'])) {
+    header('Location: http://163.117.69.19/gel');
+}
+?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -103,7 +106,7 @@ function saveScroll(){ // added function
 
     Data2= varia + "_" + title + "_" + state + "_" + solut + "_" + hints;
     // Data2= "0_0_1_0_0";
-   setCookie(cookieName2,Data2,expdate);
+    setCookie(cookieName2,Data2,expdate);
 }
 
 function loadScroll(){ // added function
@@ -114,11 +117,11 @@ function loadScroll(){ // added function
         for (var i = 0; i < ar2.length; i++) {
             if(ar2[i]=="1"){
                 $("div.course")[i].click();
-            /*	if($("div.course")[i].className != "course active"){
-                $("div.course")[i].className = 'course active';
-                } else {
-                    $("div.course")[i].className = 'course';
-            }*/
+        /*	if($("div.course")[i].className != "course active"){
+            $("div.course")[i].className = 'course active';
+            } else {
+                $("div.course")[i].className = 'course';
+        }*/
             }
         }
     }
@@ -136,12 +139,12 @@ function loadScroll(){ // added function
 
 <script>
 $(document).ready(function() {
-   /* $("div.elem").click(function() {			
-       if ($(this).attr("id")) {
-            location.href = 'http://163.117.152.240/khan_exercises/?class=admin&action=info&elem=' + $(this).attr("id");				
-        }
+/* $("div.elem").click(function() {			
+    if ($(this).attr("id")) {
+        location.href = 'http://163.117.152.240/khan_exercises/?class=admin&action=info&elem=' + $(this).attr("id");				
+    }
 });
-    */
+ */
     $("div.course").click(function() {
         $(this).toggleClass("active");
         if ($("span.toggle", $(this)).length == 0) return;
@@ -161,22 +164,25 @@ $(document).ready(function() {
 
 <body onload="loadScroll()" onunload="saveScroll()">
 
-    <div id="global-message">Cargando...</div>
+<div id="global-message">Cargando...</div>
 
-    <div id="wrapper">
-        <div class="spacer"></div>
+<div id="wrapper">
+    <div class="spacer"></div>
 
-        <div id="header"></div>
+    <div id="header"></div>
 
-        <div id="content">
+    <div id="content">
 
+<?php 
+include 'configs.php';
+?> 
+  <a href=<?php echo '"'.URL.'"'; ?>>Lista</a>
 <?php
 
 /*
  * ------- CONFIGS ---------
  */
 
-include 'configs.php';
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASS);
 

@@ -36,7 +36,9 @@ case 'mysmalllistbox':
                 tinyMCE.activeEditor.execCommand('mceInsertContent',false,v);
             }
     });
-
+    mlb2.add('Variable 1', 'val1');
+    mlb2.add('Variable 2', 'val2');
+    mlb2.add('Varaible 3', 'val3');
     return mlb2;
 case 'mysplitbutton': 
     var c = cm.createSplitButton('mysplitbutton', {
@@ -98,11 +100,12 @@ tinyMCE.init({
         editor_selector : "tinymce",
         theme : "advanced",
         skin : "o2k7",
+        width: "834",
         skin_variant : "silver",
         theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,formatselect,fontselect,fontsizeselect",
         theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,|,undo,redo,|,link,unlink,image,code,|,insertdate,inserttime,|,forecolor,backcolor",
         theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,fullscreen",
-       theme_advanced_buttons4 : "jsasciimathcharmap,asciimathcharmap,asciisvg,mylistbox,|,styleprops,visualchars,nonbreaking",
+        theme_advanced_buttons4 : "jsasciimathcharmap,asciimathcharmap,asciisvg,mylistbox,|,styleprops,visualchars,nonbreaking",
     /*BACKUP
     theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
     theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
@@ -124,9 +127,10 @@ tinyMCE.init({
         editor_selector : "tinymce_solution",
         theme : "advanced",
         skin : "o2k7",
+        width: "834",
         skin_variant : "silver",
         //theme_advanced_buttons1 : ",bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright,justifyfull,bullist,numlist,undo,redo,link,unlink",
-        theme_advanced_buttons1 : "jsasciimathcharmap, mysmalllistbox,|,code",
+        theme_advanced_buttons1 : "save,|,jsasciimathcharmap, mysmalllistbox,|,code",
         AScgiloc : 'http://www.imathas.com/editordemo/php/svgimg.php',			      //change me  
         ASdloc : 'http://www.imathas.com/editordemo/jscripts/tiny_mce/plugins/asciisvg/js/d.svg',  //change me  	
 

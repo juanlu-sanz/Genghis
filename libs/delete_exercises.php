@@ -18,4 +18,4 @@ mysql_query($query);
 //echo "<br/>Last inserted ID -->" . mysql_insert_id();
 
 
-header('Location: '.URL.'?question_id='.mysql_insert_id());
+header('Location: '.URL);

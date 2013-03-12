@@ -26,7 +26,7 @@ function getExerciseTable(){
         FROM
         khan_exercises.khan_question
         WHERE
-        khan_exercises.khan_question.question_author = '".$user->results->uid."';";
+        khan_exercises.khan_question.question_author = '".$_COOKIE['user']."';";
     $exercise_list = mysql_query($query);
 
 

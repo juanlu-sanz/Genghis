@@ -13,7 +13,7 @@ function getTable() {
     echo '	<span class="table_properties">Propiedades</span>';
     echo '</div>';
 
-    $resultwhole = mysql_query("SELECT * FROM khan_variable WHERE variable_question=" . $_SESSION['question_id']);
+    $resultwhole = mysql_query("SELECT * FROM khan_variable WHERE variable_question=" . $_GET['question_id']);
 
     $nonewvar = 0;
     while ($rowwhole = mysql_fetch_array($resultwhole)){
@@ -74,7 +74,7 @@ function getProperties($variableId, $variableType) {
  */
 function newVariable(){
     echo "<div class=\"elem\" style=\"display: none;\">";
-    echo '<form action="./libs/insertVariable.php?question_id='.$_SESSION['question_id'].'" method="post">';
+    echo '<form action="./libs/insertVariable.php?question_id='.$_GET['question_id'].'" method="post">';
     echo '<span class="table_edit" style="width: 78px;"><input type="image" src="./libs/img/add.png" border="0" ALT="Submit Form"></span>';
     echo '<span class="table_name"><input type="text" name="new_var_name" id="new_var_name" style="width:90px;"></span>';
     echo '<span class="table_properties">
@@ -103,7 +103,7 @@ function editVariable($current){
 
     echo "<div class=\"elem\" style=\"display: none;\">";
     echo '<form action="./libs/editVariable.php?question_id='.$_GET['question_id'].'" method="post">';
-    echo '<span class="table_edit" style="width: 78px;"><input type="image" src="http://163.117.152.240/khan_exercises/images/actions/add.png" border="0" ALT="Submit Form"></span>';
+    echo '<span class="table_edit" style="width: 78px;"><input type="image" src="./libs/img/add.png" border="0" ALT="Submit Form"></span>';
     echo '<span class="table_name"><input type="text" name="new_var_name" value="' . $current['variable_name'] . '" id="new_var_name" style="width:90px;"></span>';
     echo '<span class="table_properties">
         N&uacute;mero
@@ -140,7 +140,7 @@ function deleteVariable($idToBeDeleted) {
 function getArrayofVars(){
     $allVariables = array();
 
-    $resultwhole = mysql_query("SELECT * FROM khan_variable WHERE variable_question=" . $_SESSION['question_id']);
+    $resultwhole = mysql_query("SELECT * FROM khan_variable WHERE variable_question=" . $_GET['question_id']);
     while ($rowwhole = mysql_fetch_array($resultwhole)){
         $allVariables[$rowwhole['variable_id']]['name'] = $rowwhole['variable_name'];
         $allVariables[$rowwhole['variable_id']]['type'] = $rowwhole['variable_type'];
