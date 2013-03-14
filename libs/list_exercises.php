@@ -18,7 +18,9 @@ function getExerciseTable(){
         echo "Exception: ".$e->getMessage();
     }
     $user = $api->getUser($_COOKIE["user"]);
-    
+    $courses = $api->getCourses(NULL, $user->results->uid);
+
+
     $query = "SELECT 
         khan_exercises.khan_question.question_id,
         khan_exercises.khan_question.question_author,
@@ -26,7 +28,7 @@ function getExerciseTable(){
         FROM
         khan_exercises.khan_question
         WHERE
-        khan_exercises.khan_question.question_author = '".$_COOKIE['user']."';";
+        khan_exercises.khan_question.question_course = '".$courses->results[0]->id."';";
     $exercise_list = mysql_query($query);
 
 

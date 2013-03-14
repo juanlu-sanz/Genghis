@@ -17,7 +17,10 @@ else $check = 0;
 
 $qstring="UPDATE khan_question SET question_title = '".$_POST["title"]."' ,";
 $qstring .= " question_statement = '" . $_POST["statement"] . "' ,";
-$qstring .= " question_solution = '" . $_POST["solution"] . "' ";
+$qstring .= " question_solution = '" . $_POST["solution"] . "', ";
+$qstring .= " question_check = '" . $_POST["solution_checker"] . "', ";
+$qstring .= " question_error = '" . $_POST["error"] . "', ";
+$qstring .= " question_round = '" . $_POST["round"] . "' ";
 $qstring .= " WHERE question_id =".$_GET['question_id']."";
 echo $qstring;
 mysql_query($qstring);

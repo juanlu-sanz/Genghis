@@ -3,8 +3,7 @@
 include("ParensParser.php");
 
 function parse_mathjax_to_js($string) {
-    if (strrpos($string, "<span class=\"AM\">")){
-
+    if (strrpos($string, '<span class="AM">')){
         $location = strrpos($string, "<span class=\"AM\">`");
 
         $start_of_latex = $location + 18;
@@ -12,7 +11,6 @@ function parse_mathjax_to_js($string) {
         $latex_len = $end_of_latex - $start_of_latex;
 
         $actual_code_ML = substr ($string, $start_of_latex, $latex_len );
-        var_dump($actual_code_ML);
     }else{
         $actual_code_ML = $string;
     }
@@ -22,7 +20,14 @@ function parse_mathjax_to_js($string) {
 }
 
 function recursive_parsing($arrays) {
-    global $variables;
+    //----------------------------------------------- GET VARIABLES -----------------------------------------------
+
+    $allVariables = array();
+
+    $resultwhole = mysql_query("SELECT * FROM khan_variable WHERE variable_question=" . $_SESSION['question_id']);
+    while ($rowwhole = mysql_fetch_array($resultwhole)){
+        $allVariables[$rowwhole['variable_id']] = $rowwhole['variable_name'];
+    }
     $final_string="";
     $power = 0;
     foreach ($arrays as $index => $piece){
@@ -33,8 +38,14 @@ function recursive_parsing($arrays) {
                 $power=1;
             } elseif ($piece === "pi"){
                 $final_string .= "Math.PI";
-            } elseif (array_key_exists($piece, $variables->get_my_vars() )) {
-                $final_string .= "<var>".$piece."</var>";
+            } elseif ($piece[0] == '['){
+                $piece = substr($piece, 0 , -1);
+                $piece = substr($piece, 1);
+                if (in_array($piece, $allVariables )) {
+                    // $final_string .= "<var>".$piece."</var>";
+                    $final_string .=$piece;
+                }
+
             }else {
                 $final_string .= $piece;
             }
@@ -140,6 +151,11 @@ function process_and_parse(){
     $statement = $row['question_statement'];
     $solution = $row['question_solution'];
     $error = $row['question_error'];
+    $round = $row['question_round'];
+    $trimmedSolution = str_replace('<p>', "", $solution);
+    $trimmedSolution = str_replace('</p>', "", $trimmedSolution);
+    $trimmedSolution = " " . $trimmedSolution;  
+    $check = $row['question_check'];
 
     //----------------------------------------------- STRINGS -----------------------------------------------
     $requires_code = "<!DOCTYPE html>\n<html data-require=\"";
@@ -180,16 +196,32 @@ function process_and_parse(){
         $super_String = $super_String . $no_var_comment;
     }
 
-    $super_String = $super_String . $problem_code.find_and_parse_latex($statement).$question_code.find_and_parse_latex($_SESSION['text_session']);
-    $trimmedSolution = str_replace('<p>', "", $solution);
-    $trimmedSolution = str_replace('</p>', "", $trimmedSolution);
-    $trimmedSolution = " " . $trimmedSolution;  
- /* if ($_SESSION['solution_error_session'] != "") {
-        $super_String = $super_String . $solution_code12 . $error .$solution_code2./*parse_mathjax_to_js($solution.$hints_code;
-} else {
-  */
-    $super_String = $super_String . $solution_code1 ./*parse_mathjax_to_js(*/$trimmedSolution.$hints_code;
-    // }
+    $super_String = $super_String . $problem_code.find_and_parse_latex($statement);
+    //-------------------------------SOLUTION_CHECKER--------------------
+    if ($check) {
+        if ($round) {
+            $super_String = $super_String .'<b>Solución aceptada: </b><var>roundTo('.$round.','.parse_mathjax_to_js($trimmedSolution).')</var>';
+        } else {
+            $super_String = $super_String .'<b>Solución aceptada: </b><var>'.parse_mathjax_to_js($trimmedSolution).'</var>';
+        }
+    }
+    //-------------------------------solution------------
+
+
+    $super_String .= $question_code.find_and_parse_latex($_SESSION['text_session']);
+    if ($error) {
+        if ($round) {
+            $super_String = $super_String . $solution_code12 . $error .$solution_code2.'<var>roundTo('.$round.','.parse_mathjax_to_js($trimmedSolution).')</var>'.$hints_code;
+        } else {
+            $super_String = $super_String . $solution_code12 . $error .$solution_code2.'<var>'.parse_mathjax_to_js($trimmedSolution).'</var>'.$hints_code;
+        }
+    } else {
+        if ($round){
+            $super_String = $super_String . $solution_code1.'<var>roundTo('.$round.',' .parse_mathjax_to_js($trimmedSolution).')</var>'.$hints_code;
+        } else {
+            $super_String = $super_String . $solution_code1.'<var>' .parse_mathjax_to_js($trimmedSolution).'</var>'.$hints_code;
+        }
+    }
 
     if(!empty($allHints)){
         foreach ($allHints as $hintId => $hintProperties){
@@ -198,12 +230,6 @@ function process_and_parse(){
     } else{
         $super_String = $super_String .  $no_hint_comment;
     }
-    /*if ($hints->get_my_vars()) {
-        foreach ($hints->get_my_vars() as $index => $hint) {
-            $super_String = $super_String .  "\t\t<div>".$hint."</div>\n";
-        }
- } else {*/
-
 
 
     $super_String = $super_String .  $end_hints_and_file_code;
@@ -212,7 +238,7 @@ function process_and_parse(){
     if (!$success) {
         echo "Can't change permissions!";
     }
-  */
+ */
     $fh = fopen("./khan-exercises/exercises/aa.html", 'w') or exit("Unable to open file!");
     fwrite($fh, $super_String);
     fclose($fh);

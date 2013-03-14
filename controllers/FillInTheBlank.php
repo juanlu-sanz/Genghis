@@ -67,7 +67,22 @@ $row = mysql_fetch_array($result);
                         <span class="toggle more"></span> <span class="title">Solución</span>
                     </div>
                     <div class="elem">
-                        <textarea class="tinymce_solution" rows="3" cols="98" name="solution" id="solution"><?php echo $row['question_solution'];?></textarea>
+                        <textarea class="tinymce_solution" rows="3" cols="98" name="solution" id="solution"><?php if($row['question_solution']){echo $row['question_solution'];}else{echo '<p><span class="AM">`Cambia este texto por tu solucion`</span> &nbsp;</p>';};?></textarea>
+                    </div>
+
+                    <div class="elem">
+                        <span class="table_properties">Y esta solución redondeada a:
+                        <input type="text" name="round" placeholder="ejemplo: 2" <?php echo 'value="'.$row['question_round'].'"'; ?></input>
+                        decimal y acepta un error de 
+                        <input type="text" name="error" placeholder="ejemplo: 0.1" <?php echo 'value="'.$row['question_error'].'"'; ?></input>
+                        </span>
+                    </div>
+                    <div class="elem">
+                        <span class="table_properties">
+                        <input type="checkbox" name="solution_checker" value="1" <?php if($row['question_check']) {echo "checked";}?>>
+                        Enseñar la solución en el enunciado (solo para pruebas)
+                        <button type="submit">Guardar solución</button>
+                        </span>
                     </div>
 
                 </div>
