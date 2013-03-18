@@ -121,6 +121,18 @@ span.block {
     display: none;
 }
 
+div.button_return {
+    position: absolute;
+    right: 20px;
+    top: 45px;
+    width: 140px;
+}
+
+p.warning{
+    margin-top: 8px;
+    text-align: center;
+}
+
 /* TABLAS */
 table {
     width: 100%;
@@ -163,6 +175,11 @@ table td input[type="text"] {
     font-size: 9pt;
     padding: 0px 5px;
 }
+#step_string {
+    display:none;
+
+}
+
 
 /* MAQUETACIÓN */
 #wrapper {
@@ -307,6 +324,12 @@ table td input[type="text"] {
 #user-menu li:hover {
     cursor: pointer;
     background-color: #F5F5F5;
+}
+a.title  {
+    color: #333;
+    font-family: "OpenSansLight";
+    font-size: 12pt;
+    font-style:none;
 }
 
 /* BREADCRUMB */

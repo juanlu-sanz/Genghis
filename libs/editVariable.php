@@ -31,7 +31,7 @@ if ($_POST['new_var_type']=='float'){
 } else {
 
     $qstring = "UPDATE `khan_variable_integer` SET
-        `integer_min` = " . $_POST['new_var_min'] . " ,
+        `integer_min` = '" . $_POST['new_var_min'] . "' ,
         `integer_max` = '" . $_POST['new_var_max'] . "'
         WHERE integer_variable ='" . $_POST['edit_var_id'] . "';";
 
@@ -39,5 +39,5 @@ if ($_POST['new_var_type']=='float'){
 //echo '<br/>';
 //echo $qstring;
 mysql_query($qstring);
-//echo '<br />Last string is '.mysql_insert_id();
+//echo '<br />Last string is '.mysql_insert_id()
 header('Location: '.URL.'?question_id='.$_GET['question_id']);

@@ -79,7 +79,7 @@ function newVariable(){
     echo '<span class="table_name"><input type="text" name="new_var_name" id="new_var_name" style="width:90px;"></span>';
     echo '<span class="table_properties">
         N&uacute;mero
-        <select name="new_var_type" id="new_var_type">
+        <select name="new_var_type" id="new_var_type" onChange="remove_textbox()">
         <option value="integer">entero</option>
         <option value="float">decimal</option>
         </select>
@@ -87,9 +87,9 @@ function newVariable(){
         <input type="text" name="new_var_min" id="new_var_min" style="width:30px;">
         hasta
         <input type="text" name="new_var_max" id="new_var_max" style="width:30px;">
-    ) con una raz&oacute;n de
+    )<span id="step_string"> con una raz&oacute;n de
     <input type="text" name="new_var_step" id="new_var_step" style="width:30px;">
-    </span>';
+    </span></span>';
     echo "</form></div>";
 }
 /**
@@ -106,27 +106,25 @@ function editVariable($current){
     echo '<span class="table_edit" style="width: 78px;"><input type="image" src="./libs/img/add.png" border="0" ALT="Submit Form"></span>';
     echo '<span class="table_name"><input type="text" name="new_var_name" value="' . $current['variable_name'] . '" id="new_var_name" style="width:90px;"></span>';
     echo '<span class="table_properties">
-        N&uacute;mero
-        <select name="new_var_type" id="new_var_type">
-        <option value="integer">entero</option>
-        <option value="float">decimal</option>
-        </select>
-        aleatorio (desde';
+        N&uacute;mero ';
     //What kind of number is it?
     if ($current['variable_type'] == 'integer') {
-        echo '<input type="text" name="new_var_min" id="new_var_min" value="' . $result['integer_min'] . '" style="width:30px;">
-            hasta
+        echo 'entero aleatorio (desde 
+            <input type="hidden" name="new_var_type" value="integer">
+            <input type="text" name="new_var_min" id="new_var_min" value="' . $result['integer_min'] . '" style="width:30px;">hasta
             <input type="text" name="new_var_max" id="new_var_max" value="' . $result['integer_max'] . '" style="width:30px;">
-        ) con una raz&oacute;n de
+        ) <span id="step_string">con una raz&oacute;n de
         <input type="text" name="new_var_step" id="new_var_step" style="width:30px;">
-        </span>';
-    } elseif ($variableType == 'float'){
-        echo '<input type="text" name="new_var_min" id="new_var_min" value="' . $result['float_min'] . '" style="width:30px;">
-            hasta
+        </span> </span>';
+    } elseif ($current['variable_type'] == 'float'){
+        echo 'decimal aleatorio (desde
+            <input type="hidden" name="new_var_type" value="float">
+            <input type="text" name="new_var_min" id="new_var_min" value="' . $result['float_min'] . '" style="width:30px;"> hasta
             <input type="text" name="new_var_max" id="new_var_max" value="' . $result['float_max'] . '" style="width:30px;">
-        ) con una raz&oacute;n de
-        <input type="text" name="new_var_step" id="new_var_step"' . $result['float_step'] . ' style="width:30px;">
-        </span>';
+        ) <span id="step_string" style="display:inline;">con una raz&oacute;n de
+        <input type="text" name="new_var_step" id="new_var_step" value="' . $result['float_step'] . '" style="width:30px;">
+
+        <span> </span>';
     }
     echo '<input type="hidden" name="edit_var_id" value="'.$current['variable_id'].'">';
     echo "</form></div>";

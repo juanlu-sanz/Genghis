@@ -8,12 +8,19 @@
     <div id="tabs-1">
 
         <h2>Crea un ejercicio</h2>
+        <div class="button_return">
+            <form action=<?php echo '"'.URL_GEL.'"'; ?>>
+                <button type="submit">Volver a Ejercicios</button>
+                <p class="warning">¡Asegurate de haber guardado antes!</p>
+            </form>
+        </div>
+
         <p>Aqui podrás crear un ejercicio nuevo de Khan.</p>
 
         <div class="list">
 <?php $open_tabs = explode("_", $_COOKIE['open_tabs']);
 ?>
-            <!-- ---------------------- VARIABLES ---------------------- -->
+             <!-- ---------------------- VARIABLES ---------------------- -->
             <div class="course-wrapper">
             <div class="course">
                     <span class="toggle more"></span> <span class="title">Variables</span>
@@ -24,8 +31,7 @@ $vars = getArrayofVars();
 getTable();
 ?>
             </div>
-
-            <!-- ---------------------- TITLE ---------------------- -->
+             <!-- ---------------------- TITLE ---------------------- -->
             <form action=<?php echo '"libs/autosave/autosave_work.php?question_id='.$_GET['question_id'].'"'; ?> method="post" onsubmit="tinyMCE.triggerSave(false, true);">
                 <div class="course-wrapper">
                 <div class="course">
@@ -67,7 +73,7 @@ $row = mysql_fetch_array($result);
                         <span class="toggle more"></span> <span class="title">Solución</span>
                     </div>
                     <div class="elem">
-                        <textarea class="tinymce_solution" rows="3" cols="98" name="solution" id="solution"><?php if($row['question_solution']){echo $row['question_solution'];}else{echo '<p><span class="AM">`Cambia este texto por tu solucion`</span> &nbsp;</p>';};?></textarea>
+                        <textarea class="tinymce_solution" rows="3" cols="98" name="solution" id="solution"><?php if($row['question_solution']){echo $row['question_solution'];}else{echo '<p><span class="AM">`Solucion`</span> &nbsp;</p>';};?></textarea>
                     </div>
 
                     <div class="elem">

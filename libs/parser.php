@@ -14,6 +14,7 @@ function parse_mathjax_to_js($string) {
     }else{
         $actual_code_ML = $string;
     }
+    $actual_code_ML = preg_replace('/\s+/', '', $actual_code_ML);
     $p = new ParensParser();
     $array_result = $p->parse($actual_code_ML);
     return recursive_parsing($array_result);
@@ -225,7 +226,7 @@ function process_and_parse(){
 
     if(!empty($allHints)){
         foreach ($allHints as $hintId => $hintProperties){
-            $super_String = $super_String .  "\t\t<div>".$hintProperties['text']."</div>\n";
+            $super_String = $super_String .  "\t\t<div>".find_and_parse_latex($hintProperties['text'])."</div>\n";
         }
     } else{
         $super_String = $super_String .  $no_hint_comment;

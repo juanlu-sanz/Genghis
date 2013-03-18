@@ -176,7 +176,8 @@ $(document).ready(function() {
 <?php 
 include 'configs.php';
 ?> 
-  <a href=<?php echo '"'.URL.'"'; ?>>Lista</a>
+  <a class="title" href=<?php echo '"'.URL.'"'; ?>>Lista</a>&nbsp;|&nbsp;
+  <a class="title" href=<?php echo '"'.URL_GEL.'"'; ?>>Videos</a>
 <?php
 
 /*
@@ -251,7 +252,21 @@ if (isset($_REQUEST['question_id'])) {
             <p></p>
         </div>
     </div>
+<script type="text/javascript">
+function remove_textbox() {
+    var item = document.getElementById('new_var_type');
 
+    var index = item.selectedIndex;
+    if (item.options[index].text == 'entero' ) {
+        document.getElementById('step_string').style.display="none";
+    }
+    if (item.options[index].text == 'decimal' ) {
+        document.getElementById('step_string').style.display="inline";
+    }
+
+}
+
+</script>
 
 </body>
 </html>
