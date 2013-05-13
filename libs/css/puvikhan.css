@@ -181,7 +181,7 @@ table td input[type="text"] {
 }
 
 
-/* MAQUETACIîN */
+/* MAQUETACIï¿½N */
 #wrapper {
     width: 900px;
     margin: auto;
@@ -465,7 +465,7 @@ ul.breadcrumb li.current img,ul.breadcrumb li.step:hover>img,ul.breadcrumb li.co
     height: 200px;
 }
 
-/* CONFIRMACIîN */
+/* CONFIRMACIï¿½N */
 #check-info {
     margin: 10px auto;
     width: 700px;
@@ -561,6 +561,16 @@ div.list .elem span {
 
 div.list span.table_name {
     width: 120px;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+div.list span.table_author {
+	float: right;
+	margin-top: -20px;
     max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;

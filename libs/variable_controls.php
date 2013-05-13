@@ -64,7 +64,7 @@ function getProperties($variableId, $variableType) {
         return 'N&uacute;mero entero aleatorio (desde ' . $result['integer_min'] . ' hasta ' . $result['integer_max'] . ')';
     } elseif ($variableType == 'float'){
 
-        return 'N&uacute;mero decimal aleatorio (desde ' . $result['float_min'] . ' hasta ' . $result['float_max'] . ') con una raz&oacute;n de ' . $result['float_step'];
+        return 'N&uacute;mero decimal aleatorio (desde ' . $result['float_min'] . ' hasta ' . $result['float_max'] . ') con una raz&oacute;n de &plusmn; ' . $result['float_step'];
     }
 
 }
@@ -87,7 +87,7 @@ function newVariable(){
         <input type="text" name="new_var_min" id="new_var_min" style="width:30px;">
         hasta
         <input type="text" name="new_var_max" id="new_var_max" style="width:30px;">
-    )<span id="step_string"> con una raz&oacute;n de
+    )<span id="step_string"> con una raz&oacute;n de&plusmn;  
     <input type="text" name="new_var_step" id="new_var_step" style="width:30px;">
     </span></span>';
     echo "</form></div>";
