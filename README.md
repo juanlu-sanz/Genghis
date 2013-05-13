@@ -5,7 +5,7 @@ Welcome to this humble project that tries to make a tool so that non-programmers
 
 ####Lovely, what exactly is this about?
 
-Khan academy offers in their github account their [exercise module], which, if you make a specific XML file using their tags and rules, will turn it into a wonderful, self correcting exercise with many possiblities both for students and teachers.
+Khan academy offers in their github account their [exercise module], which, if you make a specific XML file using their tags and rules, will turn it into a wonderful, self correcting exercise with many possibilities both for students and teachers.
 
 This tools aim to make this more accessible for other people with less tech-oriented skills. With the tool you will be able to create all the statements and math using a simple WYIWYG editor.
 
@@ -15,7 +15,7 @@ The coding belongs to [@kadaki01], while the managing and organization was taken
 
 ####Ok, the code works but, well, it's a little messy!
 
-Yes I know and yes, I apologize. Unfortunately I didn't have as much time as I wished for cleaning code and improving performace, however after exams I plan on redoing the tool using the framework [Laravel].
+Yes I know and yes, I apologize. Unfortunately I didn't have as much time as I wanted to for cleaning code and improving performance, however after exams I plan on redoing the tool using the framework [Laravel].
 
 ####Awesome, can I install it from here?
 
