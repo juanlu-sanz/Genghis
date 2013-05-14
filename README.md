@@ -13,7 +13,7 @@ This tools aim to make this more accessible for other people with less tech-orie
 
 The coding belongs to [@kadaki01], while the managing and organization was taken care of by [@pedmume],without whom this project could have not been possible at all.
 
-This project was created by the gradient group within the Telematics Engineering department of University Carlos III od Madrid
+This project was created by the gradient group within the Telematics Engineering department of University Carlos III of Madrid
 
 ####Ok, the code works but, well, it's a little messy!
 
