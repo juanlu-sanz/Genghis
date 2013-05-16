@@ -1,10 +1,10 @@
 <?php
 if (isset($_GET['userKey'])) {
-	setcookie("user", $_GET['userKey'] , time()+3600);
-	header('Location: http://baal.uc3m.es/genghis/');
+    setcookie("user", $_GET['userKey'] , time()+3600);
+    header('Location: http://baal.uc3m.es/genghis/');
 }
 if (!isset($_COOKIE['user']) & !isset($_GET['userKey'])) {
-	header('Location: http://baal.uc3m.es/gel');
+    header('Location: http://baal.uc3m.es/gel');
 }
 ?>
 <!DOCTYPE html>
@@ -164,34 +164,34 @@ $(document).ready(function() {
 
 <body onload="loadScroll()" onunload="saveScroll()">
 
-	<div id="global-message">Cargando...</div>
+    <div id="global-message">Cargando...</div>
 
-	<div id="wrapper">
-		<div class="spacer"></div>
+    <div id="wrapper">
+        <div class="spacer"></div>
 
-		<div id="header"></div>
+        <div id="header"></div>
 
-		<div id="content">
+        <div id="content">
 
-			<?php 
-			include 'configs.php';
-
-
-			/*
-			 * ------- CONFIGS ---------
-			*/
+<?php 
+include 'configs.php';
 
 
-			$con = mysql_connect(DB_HOST, DB_USER, DB_PASS);
-
-			if (!$con)
-			{
-				die('Could not connect: ' . mysql_error());
-			}
-			mysql_select_db("khan_exercises", $con);
+/*
+ * ------- CONFIGS ---------
+ */
 
 
-			try {
+$con = mysql_connect(DB_HOST, DB_USER, DB_PASS);
+
+if (!$con)
+{
+    die('Could not connect: ' . mysql_error());
+}
+mysql_select_db("khan_exercises", $con);
+
+
+try {
     require_once("./libs/sdic_api_client_elearning.class.php");
     $api = new SDICApiClientELearning();
 
@@ -224,31 +224,31 @@ if (isset($_REQUEST['question_id'])) {
     }
 
 } elseif ($_GET['iam'] == 'admin') {
-	include('controllers/admin.php');
+    include('controllers/admin.php');
 } else {
     include("controllers/list.php");
 }
 ?>
 
-		</div>
-		<!-- End of content div -->
+        </div>
+        <!-- End of content div -->
 
-		<div id="footer"></div>
+        <div id="footer"></div>
 
-		<div class="spacer"></div>
+        <div class="spacer"></div>
 
-		<div id="credits">
-			<p>
-				<span class="bold">Designed by:</span> <a href="http://it.uc3m.es">Departamento de Ingeniería Telemática</a> | <span class="bold">Version:</span>
-				0.1 | <span class="bold">Support:</span> jusanzm@it.uc3m.es
-			</p>
-			<p>
-				&copy; 2013 <a href="http://www.uc3m.es">Universidad Carlos III de Madrid</a>
-			</p>
-			<p></p>
-		</div>
-	</div>
-	<script type="text/javascript">
+        <div id="credits">
+            <p>
+                <span class="bold">Designed by:</span> <a href="http://it.uc3m.es">Departamento de Ingeniería Telemática</a> | <span class="bold">Version:</span>
+                0.1 | <span class="bold">Support:</span> jusanzm@it.uc3m.es
+            </p>
+            <p>
+                &copy; 2013 <a href="http://www.uc3m.es">Universidad Carlos III de Madrid</a>
+            </p>
+            <p></p>
+        </div>
+    </div>
+<script type="text/javascript">
 function remove_textbox() {
     var item = document.getElementById('new_var_type');
 

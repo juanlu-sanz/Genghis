@@ -33,5 +33,6 @@ if ($_POST['new_var_type']=='float'){
         ('.mysql_insert_id().', '.$_POST['new_var_min'].', '.$_POST['new_var_max'].');';
 }
 mysql_query($qstring);
+//echo $qstring;
 //echo '<br />Last string is '.mysql_insert_id();
 header('Location: '.URL.'?question_id='.$_GET['question_id']);

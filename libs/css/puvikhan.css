@@ -561,7 +561,7 @@ div.list .elem span {
 
 div.list span.table_name {
     width: 120px;
-    max-width: 200px;
+    max-width: 500px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
