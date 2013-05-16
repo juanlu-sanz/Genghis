@@ -76,7 +76,7 @@ function newVariable(){
     echo "<div class=\"elem\" style=\"display: none;\">";
     echo '<form action="./libs/insertVariable.php?question_id='.$_GET['question_id'].'" method="post">';
     echo '<span class="table_edit" style="width: 78px;"><input type="image" src="./libs/img/add.png" border="0" ALT="Submit Form"></span>';
-    echo '<span class="table_name"><input type="text" name="new_var_name" id="new_var_name" style="width:90px;"></span>';
+    echo '<span class="table_name"><input type="text" name="new_var_name" id="new_var_name" style="width:90px;" required></span>';
     echo '<span class="table_properties">
         N&uacute;mero
         <select name="new_var_type" id="new_var_type" onChange="remove_textbox()">
@@ -84,11 +84,11 @@ function newVariable(){
         <option value="float">decimal</option>
         </select>
         aleatorio (desde
-        <input type="text" name="new_var_min" id="new_var_min" style="width:30px;">
+        <input type="number" name="new_var_min" id="new_var_min" style="width:50px;" required>
         hasta
-        <input type="text" name="new_var_max" id="new_var_max" style="width:30px;">
+        <input type="number" name="new_var_max" id="new_var_max" style="width:50px;" required>
     )<span id="step_string"> con una raz&oacute;n de&plusmn;  
-    <input type="text" name="new_var_step" id="new_var_step" style="width:30px;">
+    <input type="number" name="new_var_step" id="new_var_step" style="width:50px;" step="any" >
     </span></span>';
     echo "</form></div>";
 }
