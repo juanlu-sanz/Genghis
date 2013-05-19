@@ -17,13 +17,11 @@ function parse_mathjax_to_js($string) {
     $actual_code_ML = preg_replace('/\s+/', '', $actual_code_ML);
     $p = new ParensParser();
     $array_result = $p->parse($actual_code_ML);
-    /*cho '<pre>';
-    //print_r($array_result);
-    echo "---------------------------";
-    echo recursive_parsing(array('[m]'));
-    echo "---------------------------";
-
-    echo '</pre>';*/
+/*
+    echo '<pre>';
+    print_r($array_result);
+    echo '</pre>';
+ */
     return recursive_parsing($array_result);
 }
 
@@ -171,9 +169,6 @@ function process_and_parse(){
             $allVariables[$id]['step'] = $result['float_step'];
         }
     }
-    echo '<pre>';
-    print_r($allVariables);
-    echo '</pre>';
 
     //----------------------------------------------- GET HINTS -----------------------------------------------
 
@@ -190,6 +185,7 @@ function process_and_parse(){
     $row = mysql_fetch_array($result);
     $title = $row['question_title'];
     $statement = $row['question_statement'];
+    $course = $row['question_course'];
     $solution = $row['question_solution'];
     $error = $row['question_error'];
     $round = $row['question_round'];
@@ -284,7 +280,9 @@ function process_and_parse(){
      */
     //$fh = fopen("./khan-exercises/exercises/aa.html", 'w') or exit("Unable to open file!");
     //$fh = fopen("/mnt/metadata/khan-exercises/exercises/aa.html", 'w') or exit("Unable to open file!");
-    $fh = fopen("/var/lib/tomcat6/webapps/khan/exercises/".$_COOKIE['user'].".html", 'w') or exit("Unable to open file!");
+    $fileLocation = "/var/lib/tomcat6/webapps/khan/exercises/".$course."_".$_SESSION['question_id'].".html";
+    echo $fileLocation;
+    $fh = fopen($fileLocation, 'w') or exit("Unable to open file!");
     fwrite($fh, $super_String);
     fclose($fh);
 }
