@@ -225,7 +225,8 @@ function process_and_parse(){
         foreach ($allVariables as $id => $properties){
             if ($properties['step'] != 0) {
                 //$super_String = $super_String . $var_id_code.$properties['name'].$close_vars_code."roundTo(".$properties['step'].", randRange(".$properties['min'].", ".$properties['max']."))".$end_var_code;
-                $super_String = $super_String . $var_id_code.$properties['name'].$close_vars_code."Math.round((" . $properties['step'] . "*Math.round(Math.random()*(" . $properties['max'] . "/" . $properties['step'] . ")+" . $properties['min'] . ")*100))/100".$end_var_code;
+                //Math.round((0.02*Math.round(Math.random()*((16-7)/0.02)+(7/0.02))*100))/100
+                $super_String = $super_String . $var_id_code.$properties['name'].$close_vars_code."Math.round((" . $properties['step'] . "*Math.round(Math.random()*((" . $properties['max'] ."-". $properties['min'] .  ")/" . $properties['step'] . ")+(" . $properties['min'] ."/" . $properties['step']  . "))*100))/100".$end_var_code;
             } else {
                 $super_String = $super_String . $var_id_code.$properties['name'].$close_vars_code."randRange(".$properties['min'].", ".$properties['max'].")".$end_var_code;
             }
