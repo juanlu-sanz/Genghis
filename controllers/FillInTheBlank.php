@@ -89,7 +89,7 @@ $row = mysql_fetch_array($result);
                     <div class="elem">
                         <span class="table_properties"> <input type="checkbox" name="solution_checker" value="1" <?php if($row['question_check']) {echo "checked";}?>>
                             Enseñar la solución en el enunciado (solo para pruebas)
-                            <button type="submit">Guardar solución</button>
+                            <!--<button type="submit">Guardar solución</button>-->
                         </span>
                     </div>
 
