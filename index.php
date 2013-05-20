@@ -1,4 +1,5 @@
 <?php
+// Gestion de la userkey que nos viene de GEL
 if (isset($_GET['userKey'])) {
     setcookie("user", $_GET['userKey'] , time()+3600);
     header('Location: http://baal.uc3m.es/genghis/');
@@ -43,7 +44,10 @@ $(function() {
     $( "#tabs" ).tabs();
 });
 </script>
+
+
 <script type="text/javascript">
+//Script encargado de guardar la altura a la que esta el usuario en la pagina y que pestañas tiene abiertas
 cookieName="page_scroll";
 cookieName2="open_tabs";
 expdays=365;
