@@ -94,6 +94,9 @@ $row = mysql_fetch_array($result);
                     </div>
 
                 </div>
+                <div id="fixed-div">
+                    <button type="submit" class="tear"><span class="sub">Guardar título, enunciado y solución</span></button>
+                </div>
             </form>
             <!-- ---------------------- HINTS ---------------------- -->
             <div class="course-wrapper">

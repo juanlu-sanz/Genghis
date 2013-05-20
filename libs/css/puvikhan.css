@@ -24,6 +24,12 @@ h2 {
     font-weight: normal;
 }
 
+#fixed-div {
+    position: fixed;
+    top: 1em;
+    right: 1em;
+}
+
 .center {
     text-align: center;
 }
@@ -569,8 +575,8 @@ div.list span.table_name {
 }
 
 div.list span.table_author {
-	float: right;
-	margin-top: -20px;
+    float: right;
+    margin-top: -20px;
     max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -685,4 +691,68 @@ div.metadata {
 #remove.disabled {
     color: rgba(0, 0, 0, 0.1);
     cursor: default;
+}
+
+button.tear
+{
+    background: -webkit-linear-gradient(45deg, rgba(5,171,224,1) 40%, rgba(135,224,253,1) 100%);
+    background: -moz-linear-gradient(45deg, rgba(5,171,224,1) 40%, rgba(135,224,253,1) 100%);
+    background: -o-linear-gradient(45deg, rgba(5,171,224,1) 40%, rgba(135,224,253,1) 100%);
+    background: linear-gradient(45deg, rgba(5,171,224,1) 40%, rgba(135,224,253,1) 100%);
+    border-radius: 100% 0 100% 100%;
+    height:4em;
+    width:4em;
+    font-weight: bold;
+    font-family: Verdana;
+    font-size: 2em;
+    color: rgba(0,0,0,0.5);
+    box-shadow: 1px 3px 2px rgba(0,0,0,0.5);
+    border: 0;
+}
+
+button.tear.dollar
+{
+    color: #fff;
+    font-weight: normal;
+    text-shadow: 0px 1px 2px rgba(0,0,0,0.5);
+}
+
+button.tear.dollar:before
+{
+    content: '$';
+    font-size: 0.5em;
+    vertical-align: super;
+    color: #fff;
+    text-shadow: 0px 1px 2px rgba(0,0,0,0.5);
+}
+
+button.tear.dollar .sub
+{
+    border-top: 1px solid rgba(225,225,225,0.3);
+    box-shadow: 0px -1px 0px rgba(0,0,0,0.3);
+
+}
+
+button.tear .sub
+{
+    font-size: 0.6em;
+    font-weight: normal;
+    font-family: Georgia;
+   /* font-style: italic;*/
+    color: #FFFF99;
+    text-shadow: 0px 1px 1px rgba(0,0,0,0.5);
+    display:block;
+    padding-top: 4px;
+    margin-top: 4px;
+}
+
+/* Color Options */
+button.tear.red
+{
+    background: -moz-linear-gradient(45deg, rgba(147,2,2,1) 0%, rgba(214,27,21,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(147,2,2,1)), color-stop(100%,rgba(214,27,21,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(45deg, rgba(147,2,2,1) 0%,rgba(214,27,21,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(45deg, rgba(147,2,2,1) 0%,rgba(214,27,21,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(45deg, rgba(147,2,2,1) 0%,rgba(214,27,21,1) 100%); /* IE10+ */
+    background: linear-gradient(45deg, rgba(147,2,2,1) 0%,rgba(214,27,21,1) 100%); /* W3C */
 }

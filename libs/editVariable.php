@@ -23,7 +23,7 @@ mysql_query($qstring);
 //Find float/integer table and insert properties
 if ($_POST['new_var_type']=='float'){
     $qstring = "UPDATE `khan_variable_float` SET
-        `float_min` = " . $_POST['new_var_min'] . " ,
+        `float_min` = '" . $_POST['new_var_min'] . "' ,
         `float_max` = '" . $_POST['new_var_max'] . "' ,
         `float_step` = '" . $_POST['new_var_step'] . "'
         WHERE float_variable ='" . $_POST['edit_var_id'] . "';";
