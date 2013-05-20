@@ -46,7 +46,7 @@ $row = mysql_fetch_array($result);
 ?>
 
                         <textarea rows="3" cols="98" name="title" id="title"><?php echo $row['question_title'] ?></textarea>
-                        <button type="submit">Guardar Titulo</button>
+                        <!--<button type="submit">Guardar Titulo</button>-->
                         <div id="database"></div>
                         <div id="message">
                             <p></p>
