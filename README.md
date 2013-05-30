@@ -30,7 +30,8 @@ Once I redo the entire code in Laravel, I'll make it as modular as possible so t
 
 ###License
 
-[MIT]
+[Attribution-NonCommercial-ShareAlike 4.0 International]
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
 *Free Software, Yeah!*
 
@@ -38,5 +39,5 @@ Once I redo the entire code in Laravel, I'll make it as modular as possible so t
   [exercise module]: https://github.com/Khan/khan-exercises
   [@kadaki01]: http://juanlu.is
   [@pedmume]: https://github.com/pedmume
-  [MIT]: http://opensource.org/licenses/MIT
+  [Attribution-NonCommercial-ShareAlike 4.0 International]: http://creativecommons.org/licenses/by-nc-sa/4.0/
             
