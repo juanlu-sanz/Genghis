@@ -260,7 +260,7 @@ function remove_textbox() {
     if (item.options[index].text == 'entero' ) {
         document.getElementById('step_string').style.display="none";
     }
-    if (item.options[index].text == 'decimal' ) {
+    if (item.options[index].text == 'racional' ) {
         document.getElementById('step_string').style.display="inline";
     }
 

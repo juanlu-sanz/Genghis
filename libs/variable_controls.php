@@ -64,7 +64,7 @@ function getProperties($variableId, $variableType) {
         return 'N&uacute;mero entero aleatorio (desde ' . $result['integer_min'] . ' hasta ' . $result['integer_max'] . ')';
     } elseif ($variableType == 'float'){
 
-        return 'N&uacute;mero decimal aleatorio (desde ' . $result['float_min'] . ' hasta ' . $result['float_max'] . ') con una raz&oacute;n de &plusmn; ' . $result['float_step'];
+        return 'N&uacute;mero racional aleatorio (desde ' . $result['float_min'] . ' hasta ' . $result['float_max'] . ') con una raz&oacute;n de &plusmn; ' . $result['float_step'];
     }
 
 }
@@ -81,7 +81,7 @@ function newVariable(){
         N&uacute;mero
         <select name="new_var_type" id="new_var_type" onChange="remove_textbox()">
         <option value="integer">entero</option>
-        <option value="float">decimal</option>
+        <option value="float">racional</option>
         </select>
         aleatorio (desde
         <input type="number" name="new_var_min" id="new_var_min" style="width:50px;" required step="any">
@@ -117,7 +117,7 @@ function editVariable($current){
         <input type="text" name="new_var_step" id="new_var_step" style="width:30px;">
         </span> </span>';
     } elseif ($current['variable_type'] == 'float'){
-        echo 'decimal aleatorio (desde
+        echo 'racional aleatorio (desde
             <input type="hidden" name="new_var_type" value="float">
             <input type="text" name="new_var_min" id="new_var_min" value="' . $result['float_min'] . '" style="width:30px;"> hasta
             <input type="text" name="new_var_max" id="new_var_max" value="' . $result['float_max'] . '" style="width:30px;">
