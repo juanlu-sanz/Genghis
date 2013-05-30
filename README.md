@@ -30,7 +30,7 @@ Once I redo the entire code in Laravel, I'll make it as modular as possible so t
 
 ###License
 
-MIT
+[MIT]
 
 *Free Software, Yeah!*
 
@@ -38,4 +38,5 @@ MIT
   [exercise module]: https://github.com/Khan/khan-exercises
   [@kadaki01]: http://juanlu.is
   [@pedmume]: https://github.com/pedmume
+  [MIT]: http://opensource.org/licenses/MIT
             
