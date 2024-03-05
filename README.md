@@ -11,7 +11,7 @@ This tools aim to make this more accessible for other people with less tech-orie
 
 ####Who made this?
 
-The coding belongs to [@kadaki01], while the managing and organization was taken care of by [@pedmume],without whom this project could have not been possible at all.
+The coding belongs to [@juanlu], while the managing and organization was taken care of by [@pedmume],without whom this project could have not been possible at all.
 
 This project was created by the gradient group, which is part of the Telematics Engineering department of University Carlos III of Madrid
 
@@ -36,6 +36,6 @@ Once I redo the entire code in Laravel, I'll make it as modular as possible so t
 
   [Laravel]: http://laravel.com/
   [exercise module]: https://github.com/Khan/khan-exercises
-  [@kadaki01]: http://juanlu.is
+  [@juanlu]: http://juanlu.is
   [@pedmume]: https://github.com/pedmume
             
